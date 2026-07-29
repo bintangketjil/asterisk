@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+set -xe
+
+mkdir -p build/assets
+cp -ru assets/static build/assets
+
+pandoc -s \
+       --template=assets/templates/base.html \
+       content/pages/index.md \
+       -o build/index.html
+
+pandoc -s \
+       --template=assets/templates/writings.html \
+       content/writings/decision.md \
+       -o build/writings/decision.html

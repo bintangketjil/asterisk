@@ -1,0 +1,25 @@
+${site-head()}
+
+<body>
+  $for(include-before)$
+  $include-before$
+  $endfor$
+
+  ${main-header()}
+  
+  <main class="site-main">
+    <div class="container">
+
+      $body$
+
+      <br>
+      <br>
+      <p>Return to <em><a href="/">Home</a></em></p>
+    </div>
+  </main>
+
+  $for(include-after)$
+  $include-after$
+  $endfor$
+</body>
+
