@@ -3,14 +3,24 @@ title: Asterisk
 date: 2026-07-27
 category: page
 type: root-index
-document-css: true
-css: index.css
+css: /assets/static/css/main.css
 ---
 
+<!-- @section(name="hero", class=".hero .container") hero -->
 
-*Wizard Frog* ![Wizard Frog Greets You](/images/frog0.svg "Wizard Frog"){height="100"} *Greets you all.*
 
-::::::::: {.section .intro}
+<!-- @endsection -->
+
+
+<!-- @section(name="intro" class=".intro .container") -->
+:::::: {.section .intro .container}
+
+::: {.wizardfrog}
+
+*Wizard Frog ![Wizard Frog Greets You](/images/frog0.svg "Wizard Frog"){height="100"} 
+greets you all.*
+
+:::
 
 What follows is a small archive of things that long enough to be worth keeping. I hope you find something worth carrying with you.
 
@@ -20,69 +30,83 @@ What follows is a small archive of things that long enough to be worth keeping. 
 - [Library](/library) collects books and references worth returning to.
 - [Self](/self) is where you'll find a little about me.
 
+<!-- @block(name="info") -->
+::: {.info}
 
-:::::: {.infos}
+Updated @value(self-timestamp) &middot; @value(entries-count) entries
 
-Updated {{datetime}} &middot; {{entries-count}} entries
+:::
+<!-- @endblock -->
 
 ::::::
+<!-- @endsection -->
 
-:::::::::
 
-::::::::: {.section .recent}
+<!-- @section(name="recent", class=".intro .recent") -->
+:::::: {.section .recent .container}
 ## Recent
 
-::: {.list-nostyle .list-separator}
+<!-- @feed(source="recent-entries", limit=5) -->
+::: {.recent-entries .list-nostyle}
 
-{{recent-list}}
-
-
-- [26 Jul &middot; Notes &middot; 2 Min]{.entry-meta}
+- 26 July &middot; Notes &middot; 2 Min
   
-  [How Do We Count Lives](/path){.entry-title}
+  [Decision](/writings/notes/decision.html)
   
-  [This is a paragraph about how do we count lives of our own or anybody else's. This is a paragraph about how do we count lives of our own or anybody else's. This is a paragraph about how do we count lives of our own or anybody else's.]{.entry-summary}
+  A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.
 
+- 26 July &middot; Notes &middot; 2 Min
+  
+  [Decision](/writings/notes/decision.html)
+  
+  I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine.
 
-
-[Browse Archive &rarr;](/archive){.cta}
+- 26 July &middot; Notes &middot; 2 Min
+  
+  [Decision](/writings/notes/decision.html)
+  
+  I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at the present moment; and yet I feel that I never was a greater artist than now.
 
 :::
 
-:::::::::
+[Browse Archive &rarr;](/archive){.cta}
 
-::::::::: {.section .projects}
+::::::
+<!-- @endsection -->
 
+
+<!-- @section(name="projects" class=".projects .container")-->
+:::::: {.section .projects .container}
 ## Projects
 
-::::: {.list-nostyle}
+<!-- @feed(source="recent-projects", limit=2) -->
+::: {.recent-projects .list-nostyle}
 
-- [[Artifact]{.project-title}]{.img-placeholder}
-
-  ::: {.project-caption}
-  [[A Tiny Publishing System]{.project-summary}]{.project-caption}
+- [Artifact](/projects/artifact)
   
-  [Development &middot; Updated 27 Jul]{.project-meta}
-  :::
-
-- [[Asterisk]{.project-title}]{.img-placeholder}
-
-  ::: {.project-caption}
-  [[An Archive]{.project-summary}]{.project-caption}
+  A Tiny Publishing System
   
-  [Development &middot; Updated 27 Jul]{.project-meta}
-  :::
-
-- [[Garden]{.project-title}]{.img-placeholder}
-
-  ::: {.project-caption}
-  [[A Digital Garden]{.project-summary}]{.project-caption}
+  Development &middot; Updated 26 July
   
-  [Development &middot; Updated 27 Jul]{.project-meta}
-  :::
+- [Garden](/projects/garden)
+  
+  My Digital Garden
+  
+  Active &middot; Updated 25 July
 
-[See More Projects &rarr;](/projects){.cta}
+:::
 
-:::::
+[See More &rarr;](/archive){.cta}
 
-:::::::::
+::::::
+<!-- @endsection -->
+
+<!-- @section(name="random", class=".random .container") -->
+:::::: {.section .random .container}
+
+## /r/
+
+Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.
+
+::::::
+<!-- @endsection -->
