@@ -1,0 +1,15 @@
+#!/bin/env bash
+
+set -xe
+
+TARGET="$1"
+
+for f in "$TARGET"/*.{otf,ttf}; do
+	[ -e "$f" ] || continue
+	echo "$(basename "$f")"
+
+	woff2_compress "$f"
+	sfnt2woff "$f"
+done
+
+exit

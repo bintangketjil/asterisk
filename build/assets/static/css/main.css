@@ -1,3 +1,5 @@
+@import "/assets/static/css/fonts.css";
+
 @layer reset, base, component, util;
 
 @layer reset {
@@ -6,15 +8,23 @@
 	--bg1: #e0c9a6;
 
 	--ink: #1d1c1c;
-	--muted: #4A4949;
-	--muted1: #312f30;
+	--muted: #6c6464;
+	--muted1: #4a525d;
+	--muted2: #3a3838
 	--paper: #e6e2da;
 	--highlight: #D8C08A;
-	--border: #A39D95;
+	/* --border: #A39D95; */
+
 	--stamp: #8A2E2E;
+
 	--accent: #284776;
 	--accent1: #113059;
 	--accent2: #b8483c;
+	
+	--border: #C2A77C;
+	--border1: #A68D65;
+	--border2: #F4EFE6;
+	--border3: #40372A;
 
 	--link: var(--accent1);
 	--active: var(--accent2);
@@ -23,6 +33,10 @@
 	--layout-wide: 59rem;
 	--layout-md: 46rem;
 	--layout-narrow: 39rem;
+
+	--font-main: "PPWriter-Regular";
+	--font-mono: "PPNeueMontrealMono-Book";
+	--font-fallback: serif;
 
 	--text-xs: 0.725rem;
 	--text-sm: 0.825rem;
@@ -163,7 +177,9 @@
     body {
 	background: var(--bg);
 	color: var(--ink);
+	font-family: var(--font-main), var(--font-fallback);
 	line-height: 1.55;
+	font-size: 1rem;
     }
 
     a {
@@ -225,8 +241,13 @@
     main section:not(:first-of-type) {
 	border-top: 1px solid var(--border);
     }
-    
+    main {
+	& h1, h2, h3, h4 {
+	    font-size: inherit;
+	}
+    }
     .site-header {
+	margin: .5em 0 1em 0;
     }
     .site-header::before {
 	content: "";
@@ -244,6 +265,7 @@
 	font-style: italic;
 	position: relative;
 	font-weight: bold;
+	transition: all 0.5s ease-in-out .5s;
     }
     .logo-type {
 	display: inline-block;
@@ -265,14 +287,15 @@
 	transition: all 0.5s ease-in-out .5s, opacity 0.6s ease .5s;
     }
     .site-logo:hover {
+	margin-left: 1em;
 	& .logo-type {
 	    opacity: 1;
 	}
 
 	&::before {
-	    width: 15px;
-	    height: 15px;
-	    left: -.7em;
+	    width: 13px;
+	    height: 13px;
+	    left: -1em;
 
 	}
     }
@@ -282,10 +305,13 @@
 	text-decoration: none;
     }
     .site-header a:hover, .site-header a.active {
-	text-decoration: underline;
-	text-underline-offset: .35em;
-	text-decoration-style: dashed;
-	text-decoration-thickness: from-font;
+	/* text-decoration: underline; */
+	/* text-underline-offset: .35em; */
+	/* text-decoration-style: dashed; */
+	/* text-decoration-thickness: from-font; */
+	/* font-family: PPWriter-RegularItalic; */
+	/* font-style: italic; */
+	font-weight: bold;
     }
     
     .site-header .header-inner{
@@ -295,6 +321,7 @@
 	align-items: center;
 	margin-bottom: 3em;
 	flex-wrap: wrap;
+	font-size: var(--text-sm);
     }
     
     .site-nav {
@@ -304,25 +331,12 @@
 	flex-wrap: wrap;
     }
 
-    .wizardfrog {
-	margin-top: var(--space-5);
-	margin-bottom: var(--space-6);
-	& img {
-	    margin: .5em 0;
-	}
-    }
 
-    .info {
-	margin-top: var(--space-8);
-	font-size: small;
-	font-family: monospace;
-	text-align: right;
-    }
 }
 
 @layer util {
     .container {
-	--container-width: var(--layout-narrow);
+	--container-width: 35rem;
 	width: min(var(--page-width), var(--container-width));
 	margin: auto;
     }
@@ -336,6 +350,13 @@
 	margin: 0;
 	padding: 0;
     }
+
+    .cta {
+    display: block;
+    letter-spacing: 1;
+    font-size: var(--text-sm);
+    font-family: PPWriter-RegularItalic, serif;
+}
     
     .list-separator li {
 	padding-top: .5em;
@@ -344,6 +365,39 @@
     }
     .list-separator li:hover {
 	opacity: 1;
+    }
+
+    .recent-entries {
+	& ul {
+	    margin: var(--space-5) 0;
+	}
+	
+	& li {
+	    margin-bottom: var(--space-7);
+	    & p:nth-child(1) {
+		color: var(--muted);
+		font-size: var(--text-xs);
+		font-variant-numeric: tabular-nums;
+	    }
+	    & p:nth-child(2) {
+		margin: var(--space-1) 0 var(--space-4) 0 !important;
+	    }
+	}
+    }
+
+    .wizardfrog {
+	margin: var(--space-9) 0;
+	& img {
+	    display: inline-block;
+	}
+    }
+
+    .info {
+	margin-top: var(--space-8);
+	font-size: var(--text-xs);
+	font-family: var(--font-mono), monospace;
+	text-align: right;
+	color: var(--muted);
     }
     
 }

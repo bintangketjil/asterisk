@@ -1,0 +1,40 @@
+#!/bin/env bash
+
+TARGET="$1"
+OUTPUT="assets/static/css/fonts.css"
+
+if [ ! -d "$TARGET" ]; then
+	echo "Dir not found"
+	exit 1
+fi
+
+> "$OUTPUT"
+
+for f in "$TARGET"/*.{ttf,otf,woff,woff2}; do
+	[ -e "$f" ] || continue
+
+	filename=$(basename -- "$f")
+	ext="${filename##*.}"
+	ext_lower=$(echo "$ext" | tr 'A-Z' 'a-z')
+	font="${filename%.*}"
+
+	case "$ext_lower" in
+		woff2) format="woff2" ;;
+		woff) format="woff" ;;
+		ttf) format="ttf" ;;
+		otf) format="otf" ;;
+		*) continue ;;
+	esac
+
+	cat << EOF >> "$OUTPUT"
+@font-face {
+	font-family: '${font}';
+	src: url('/${TARGET}/${filename}') format('${format}');
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+EOF
+
+done

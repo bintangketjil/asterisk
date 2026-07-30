@@ -9,7 +9,6 @@ pandoc -s \
        --template=assets/templates/base.html \
        content/pages/index.md \
        -o build/index.html
-
 pandoc -s \
        --template=assets/templates/writings.html \
        content/writings/decision.md \
