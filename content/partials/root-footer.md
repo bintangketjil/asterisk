@@ -1,10 +1,8 @@
 ---
 title: footer
 category: partials
-type: default-footer
+type: root-footer
 ---
-
-[End of page]{.eop}
 
 :::::: {.footer-text}
 
@@ -12,16 +10,17 @@ type: default-footer
 
 **Asterisk**
 
-A tiny home for what I've been holding all this time.
-
-:::
-
-::: {.site-info}
 
 Last updated 29 July 2026. \
 5 published entries. \
 
 Generated with [*Artifact*](/projects/artifact).
+
+:::
+
+::: {.site-colophone}
+
+Asterisk is an archive for what I've been consuming all this time, and also a storage where I place a tiny bit of my creations. 
 
 :::
 

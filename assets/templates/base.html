@@ -1,20 +1,24 @@
-${site-head()}
-
-<body>
-  $for(include-before)$
-  $include-before$
-  $endfor$
-
-  ${main-header()}
+<!DOCTYPE html>
+<html lang="en">
   
-  <main class="site-main">
-    $body$
-  </main>
+  ${site-head()}
 
-  $for(include-after)$
-  $include-after$
-  $endfor$
+  <body>
+    $for(include-before)$
+    $include-before$
+    $endfor$
 
-  ${main-footer()}
-</body>
+    ${main-header()}
+    
+    <main class="site-main">
+      $body$
+    </main>
 
+    $for(include-after)$
+    $include-after$
+    $endfor$
+
+    ${root-footer()}
+  </body>
+
+</html>

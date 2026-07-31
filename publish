@@ -5,17 +5,32 @@ set -xe
 mkdir -p build/assets
 cp -ru assets/static build/assets
 
+# root-footer
+pandoc -s \
+       --template=assets/templates/footer.html \
+       content/partials/root-footer.md \
+       -o assets/templates/root-footer.html
+
+# default-footer
 pandoc -s \
        --template=assets/templates/footer.html \
        content/partials/footer.md \
-       -o assets/templates/main-footer.html
+       -o assets/templates/default-footer.html
 
+# root-index
 pandoc -s \
        --template=assets/templates/base.html \
        content/pages/index.md \
        -o build/index.html
 
+# writings-index
 pandoc -s \
        --template=assets/templates/writings.html \
+       content/pages/writings.md \
+       -o build/writings/index.html
+
+# note-entries`
+pandoc -s \
+       --template=assets/templates/article.html \
        content/writings/decision.md \
        -o build/writings/notes/decision.html
