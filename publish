@@ -6,10 +6,16 @@ mkdir -p build/assets
 cp -ru assets/static build/assets
 
 pandoc -s \
+       --template=assets/templates/footer.html \
+       content/partials/footer.md \
+       -o assets/templates/main-footer.html
+
+pandoc -s \
        --template=assets/templates/base.html \
        content/pages/index.md \
        -o build/index.html
+
 pandoc -s \
        --template=assets/templates/writings.html \
        content/writings/decision.md \
-       -o build/writings/decision.html
+       -o build/writings/notes/decision.html

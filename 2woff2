@@ -9,7 +9,7 @@ for f in "$TARGET"/*.{otf,ttf}; do
 	echo "$(basename "$f")"
 
 	woff2_compress "$f"
-	sfnt2woff "$f"
+#	sfnt2woff "$f"
 done
 
 exit

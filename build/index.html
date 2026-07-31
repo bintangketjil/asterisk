@@ -4,10 +4,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="dcterms.date" content="2026-07-27" />
         <style>
-    code{white-space: pre-wrap;}
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     /* The extra [class] is a hack that increases specificity enough to
        override a similar rule in reveal.js */
@@ -49,13 +55,17 @@
     <!-- @section(name="intro" class=".intro .container") -->
     <section class="intro container">
     <div class="wizardfrog">
-    <p><em>Wizard Frog <img src="/images/frog0.svg" title="Wizard Frog"
-    height="100" alt="Wizard Frog Greets You" /> greets you
-    all.</em></p>
+    <figure>
+    <img src="/images/frog0.svg" title="Wizard Frog" height="100"
+    alt="Wizard Frog greets you all." />
+    <figcaption aria-hidden="true"><em>Wizard Frog greets you
+    all.</em></figcaption>
+    </figure>
+    <p>Wizard Frog greets you all.</p>
     </div>
-    <p>What follows is a small archive of things that long enough to be
-    worth keeping. I hope you find something worth carrying with
-    you.</p>
+    <p>What follows is a small archive of things that stayed with me
+    long enough to be worth keeping. I hope you find something worth
+    carrying with you.</p>
     <ul>
     <li>Visit <a href="/writings">Writings</a> for essays and
     notes.</li>
@@ -70,10 +80,7 @@
     </ul>
     <!-- @block(name="info") -->
     <div class="info">
-    <p>Updated <span class="citation"
-    data-cites="value">@value</span>(self-timestamp) · <span
-    class="citation" data-cites="value">@value</span>(entries-count)
-    entries</p>
+    <p>Updated 27 July 2026 · 5 entries</p>
     </div>
     <!-- @endblock -->
     </section>
@@ -136,4 +143,28 @@
     <!-- @endsection -->
   </main>
 
-  </body>
+  
+  <footer class="site-footer">
+    <div class="footer-inner container">
+      <p><span class="eop">End of page</span></p>
+      <div class="footer-text">
+      <div class="site-info">
+      <p><strong>Asterisk</strong></p>
+      <p>Last updated 29 July 2026.<br />
+      5 published entries.<br />
+      </p>
+      <p>Generated with <a
+      href="/projects/artifact"><em>Artifact</em></a>.</p>
+      </div>
+      <div class="site-colophone">
+      <p>Asterisk is an archive for what I’ve been consuming all this
+      time, and also a storage where I place a tiny bit of my
+      creations.</p>
+      </div>
+      </div>
+      <div class="footer-links">
+      <p><a href="/path-to-source">Source</a> · <a
+      href="/contact">Contact</a> ·</p>
+      </div>
+    </div>
+  </footer></body>

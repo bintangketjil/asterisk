@@ -17,12 +17,13 @@ css: /assets/static/css/main.css
 
 ::: {.wizardfrog}
 
-*Wizard Frog ![Wizard Frog Greets You](/images/frog0.svg "Wizard Frog"){height="100"} 
-greets you all.*
+![*Wizard Frog greets you all.*](/images/frog0.svg "Wizard Frog"){height="100"}
+
+Wizard Frog greets you all.
 
 :::
 
-What follows is a small archive of things that long enough to be worth keeping. I hope you find something worth carrying with you.
+What follows is a small archive of things that stayed with me long enough to be worth keeping. I hope you find something worth carrying with you.
 
 - Visit [Writings](/writings) for essays and notes.
 - Browse [Visuals](/visuals) for sketches and experiments.
@@ -33,7 +34,7 @@ What follows is a small archive of things that long enough to be worth keeping. 
 <!-- @block(name="info") -->
 ::: {.info}
 
-Updated @value(self-timestamp) &middot; @value(entries-count) entries
+Updated 27 July 2026 &middot; 5 entries
 
 :::
 <!-- @endblock -->
