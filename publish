@@ -24,6 +24,7 @@ LOG_OUT="$BUILD/self/log/index.html"
 FOOTER_TEMPL="$TEMPLATES/footer.html"
 BASE_TEMPL="$TEMPLATES/base.html"
 WRITINGS_TEMPL="$TEMPLATES/writings.html"
+LOG_TEMPL="$TEMPLATES/log.html"
 ARTICLE_TEMPL="$TEMPLATES/article.html"
 
 PANDOC="pandoc"
@@ -87,6 +88,13 @@ echo -e "[artifact] generate $INDEX_OUT"
 
 
 echo -e "[artifact] generate $WRITINGS_OUT"
+
+writings_out=$(dirname $WRITINGS_OUT)
+
+if [ ! -d "$writings_out" ]; then
+    mkdir -p "$writings_out"
+fi
+
 "$PANDOC" "$PANDOC_COMMON" \
 	  --template="$WRITINGS_TEMPL" \
 	  "$WRITINGS_SRC" \
@@ -102,7 +110,7 @@ if [ ! -d "$out" ]; then
 fi
 
 "$PANDOC" "$PANDOC_COMMON" \
-	  --template="$BASE_TEMPL" \
+	  --template="$LOG_TEMPL" \
 	  "$LOG_SRC" \
 	  -o "$LOG_OUT"
 
@@ -123,35 +131,3 @@ for note in content/writings/notes/*.md; do
 		  -o "$out"
     fi
 done
-
-
-
-# # root-footer
-# pandoc -s \
-#        --template=assets/templates/footer.html \
-#        content/partials/root-footer.md \
-#        -o assets/templates/root-footer.html
-
-# # default-footer
-# pandoc -s \
-#        --template=assets/templates/footer.html \
-#        content/partials/footer.md \
-#        -o assets/templates/default-footer.html
-
-# # root-index
-# pandoc -s \
-#        --template=assets/templates/base.html \
-#        content/pages/index.md \
-#        -o build/index.html
-
-# # writings-index
-# pandoc -s \
-#        --template=assets/templates/writings.html \
-#        content/pages/writings.md \
-#        -o build/writings/index.html
-
-# # note-entries`
-# pandoc -s \
-#        --template=assets/templates/article.html \
-#        content/writings/decision.md \
-#        -o build/writings/notes/decision.html
