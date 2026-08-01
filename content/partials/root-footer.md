@@ -18,7 +18,9 @@ Generated with [*Artifact*](/projects/artifact).
 
 :::
 
-::: {.site-colophone}
+![](/assets/static/images/asterisk-logo0.svg){.footer-logo height="20"}
+
+::: {.site-info .site-colophone}
 
 Asterisk is an archive for what I've been consuming all this time, and also a storage where I place a tiny bit of my creations. 
 

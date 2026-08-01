@@ -17,7 +17,7 @@ css: /assets/static/css/main.css
 
 ::: {.wizardfrog}
 
-![*Wizard Frog greets you all.*](/images/frog0.svg "Wizard Frog"){height="100"}
+![*Wizard Frog greets you all.*](/assets/static/images/frog0.svg "Wizard Frog"){height="100"}
 
 Wizard Frog greets you all.
 

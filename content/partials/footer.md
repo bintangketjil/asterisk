@@ -8,6 +8,8 @@ type: default-footer
 
 :::::: {.footer-text}
 
+![](/assets/static/images/frog0.svg){.afrog height="85"}
+
 ::: {.site-info}
 
 **Asterisk**

@@ -1,36 +1,157 @@
 #!/usr/bin/env bash
 
-set -xe
+set -Eeuo pipefail
 
-mkdir -p build/assets
-cp -ru assets/static build/assets
+BUILD="build"
+ASSETS="assets/static"
+TEMPLATES="assets/templates"
+PARTIALS="content/partials"
 
-# root-footer
-pandoc -s \
-       --template=assets/templates/footer.html \
-       content/partials/root-footer.md \
-       -o assets/templates/root-footer.html
+ROOTFOOTER_SRC="$PARTIALS/root-footer.md"
+DEFFOOTER_SRC="$PARTIALS/footer.md"
+INDEX_SRC="content/pages/index.md"
+WRITINGS_SRC="content/pages/writings.md"
+LOG_SRC="content/self/log.md"
 
-# default-footer
-pandoc -s \
-       --template=assets/templates/footer.html \
-       content/partials/footer.md \
-       -o assets/templates/default-footer.html
+ROOTFOOTER_OUT="$TEMPLATES/root-footer.html"
+DEFFOOTER_OUT="$TEMPLATES/default-footer.html"
+ASSETS_OUT="$BUILD/assets"
+INDEX_OUT="$BUILD/index.html"
+WRITINGS_OUT="$BUILD/writings/index.html"
+NOTES_OUT="$BUILD/writings/notes"
+LOG_OUT="$BUILD/self/log/index.html"
 
-# root-index
-pandoc -s \
-       --template=assets/templates/base.html \
-       content/pages/index.md \
-       -o build/index.html
+FOOTER_TEMPL="$TEMPLATES/footer.html"
+BASE_TEMPL="$TEMPLATES/base.html"
+WRITINGS_TEMPL="$TEMPLATES/writings.html"
+ARTICLE_TEMPL="$TEMPLATES/article.html"
 
-# writings-index
-pandoc -s \
-       --template=assets/templates/writings.html \
-       content/pages/writings.md \
-       -o build/writings/index.html
+PANDOC="pandoc"
+PANDOC_COMMON="-s"
 
-# note-entries`
-pandoc -s \
-       --template=assets/templates/article.html \
-       content/writings/decision.md \
-       -o build/writings/notes/decision.html
+
+ARG=""
+
+if [ $# -ge 1 ]; then
+    ARG="$1"
+fi
+
+if [ "$ARG" = "clean" ]; then
+    if [ -d "$BUILD" ]; then
+	if rm -rf "$BUILD"; then
+	    echo "[artifact] '$BUILD' dir removed"
+	    exit 0
+	else
+	    exit "[ERROR] cannot remove '$BUILD' dir ..."
+	    exit 1
+	fi
+    else
+	echo "[SKIP] '$BUILD' dir was already removed"
+	exit 0
+    fi
+fi
+
+
+if [ ! -d "$BUILD" ]; then
+    echo "[artifact] create '$BUILD' directory"
+    mkdir -p "$BUILD"
+fi
+
+
+echo "[copy] '$ASSETS' to '$ASSETS_OUT'"
+if [ -d "$ASSETS" ]; then
+    mkdir -p "$ASSETS_OUT"
+    cp -ruT "$ASSETS" "$ASSETS_OUT/static"
+fi
+
+
+echo -e "[artifact] generate $ROOTFOOTER_OUT"
+"$PANDOC" "$PANDOC_COMMON" \
+	  --template="$FOOTER_TEMPL" \
+	  "$ROOTFOOTER_SRC" \
+	  -o "$ROOTFOOTER_OUT"
+
+
+echo -e "[artifact] generate $DEFFOOTER_OUT"
+"$PANDOC" "$PANDOC_COMMON" \
+	  --template="$FOOTER_TEMPL" \
+	  "$DEFFOOTER_SRC" \
+	  -o "$DEFFOOTER_OUT"
+
+
+echo -e "[artifact] generate $INDEX_OUT"
+"$PANDOC" "$PANDOC_COMMON" \
+	  --template="$BASE_TEMPL" \
+	  "$INDEX_SRC" \
+	  -o "$INDEX_OUT"
+
+
+echo -e "[artifact] generate $WRITINGS_OUT"
+"$PANDOC" "$PANDOC_COMMON" \
+	  --template="$WRITINGS_TEMPL" \
+	  "$WRITINGS_SRC" \
+	  -o "$WRITINGS_OUT"
+
+
+echo -e "[artifact] generate $LOG_OUT"
+
+out=$(dirname $LOG_OUT)
+
+if [ ! -d "$out" ]; then
+    mkdir -p "$out"
+fi
+
+"$PANDOC" "$PANDOC_COMMON" \
+	  --template="$BASE_TEMPL" \
+	  "$LOG_SRC" \
+	  -o "$LOG_OUT"
+
+
+for note in content/writings/notes/*.md; do
+    if [ -f "$note" ]; then
+	filename=$(basename "$note")
+	slug="${filename%.*}.html"
+	out="$NOTES_OUT/$slug"
+	
+	echo -e "[artifact] generate $out"
+
+	mkdir -p "$NOTES_OUT"
+	
+	"$PANDOC" "$PANDOC_COMMON" \
+		  --template="$ARTICLE_TEMPL" \
+		  "$note" \
+		  -o "$out"
+    fi
+done
+
+
+
+# # root-footer
+# pandoc -s \
+#        --template=assets/templates/footer.html \
+#        content/partials/root-footer.md \
+#        -o assets/templates/root-footer.html
+
+# # default-footer
+# pandoc -s \
+#        --template=assets/templates/footer.html \
+#        content/partials/footer.md \
+#        -o assets/templates/default-footer.html
+
+# # root-index
+# pandoc -s \
+#        --template=assets/templates/base.html \
+#        content/pages/index.md \
+#        -o build/index.html
+
+# # writings-index
+# pandoc -s \
+#        --template=assets/templates/writings.html \
+#        content/pages/writings.md \
+#        -o build/writings/index.html
+
+# # note-entries`
+# pandoc -s \
+#        --template=assets/templates/article.html \
+#        content/writings/decision.md \
+#        -o build/writings/notes/decision.html
