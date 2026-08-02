@@ -2,6 +2,8 @@
 
 set -Eeuo pipefail
 
+export PANDOC_DATA_DIR="assets/template"
+
 BUILD="build"
 ASSETS="assets/static"
 TEMPLATES="assets/templates"
