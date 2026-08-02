@@ -6,7 +6,7 @@ type: default-footer
 
 [End of page]{.eop}
 
-:::::: {.footer-text}
+:::::: {.footer-text .prose}
 
 ![](/assets/static/images/frog0.svg){.afrog height="85"}
 

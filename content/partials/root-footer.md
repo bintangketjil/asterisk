@@ -4,7 +4,7 @@ category: partials
 type: root-footer
 ---
 
-:::::: {.footer-text}
+:::::: {.footer-text .prose}
 
 ::: {.site-info}
 

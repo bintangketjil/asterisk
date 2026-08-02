@@ -32,11 +32,11 @@ What follows is a small archive of things that stayed with me long enough to be 
 - [Self](/self) is where you'll find a little about me.
 
 <!-- @block(name="info") -->
-::: {.info}
+<!-- ::: {.info} -->
 
-Updated 27 July 2026 &middot; 5 entries
+<!-- Updated 27 July 2026 &middot; 5 entries -->
 
-:::
+<!-- ::: -->
 <!-- @endblock -->
 
 ::::::
@@ -50,21 +50,21 @@ Updated 27 July 2026 &middot; 5 entries
 <!-- @feed(source="recent-entries", limit=5) -->
 ::: {.recent-entries .list-nostyle}
 
-- 26 July &middot; Note
+- [Decision](/writings/notes/decision.html)
   
-  [Decision](/writings/notes/decision.html)
+  26 July &middot; Note
   
   A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.
 
-- 26 July &middot; Essay
+- [What We Talk About When We Talk About Love](/writings/notes/decision.html)
   
-  [What We Talk About When We Talk About Love](/writings/notes/decision.html)
+  26 July &middot; Essay
   
   I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine.
 
-- 26 July &middot; Log
+- [Being and Time](/writings/notes/decision.html)
   
-  [Being and Time](/writings/notes/decision.html)
+  26 July &middot; Log
   
   I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at the present moment; and yet I feel that I never was a greater artist than now.
 
