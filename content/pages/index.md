@@ -17,19 +17,23 @@ css: /assets/static/css/main.css
 
 ::: {.wizardfrog}
 
-![*Wizard Frog greets you all.*](/assets/static/images/frog0.svg "Wizard Frog"){height="100"}
-
-Wizard Frog greets you all.
+![Wizard Frog greets you all.](/assets/static/images/frog0.svg "Wizard Frog"){height="60"}
 
 :::
 
 What follows is a small archive of things that stayed with me long enough to be worth keeping. I hope you find something worth carrying with you.
 
-- Visit [Writings](/writings) for essays and notes.
-- Browse [Visuals](/visuals) for sketches and experiments.
-- Explore [Projects](/projects) for things I've built.
-- [Library](/library) collects books and references worth returning to.
-- [Self](/self) is where you'll find a little about me.
+Visit [Writings](/writings) for essays and notes.
+Browse [Visuals](/visuals) for sketches and experiments.
+Explore [Projects](/projects) for things I've built.
+[Library](/library) collects books and references worth returning to.
+[Self](/self) is where you'll find a little about me.
+
+<!-- - Visit [Writings](/writings) for essays and notes. -->
+<!-- - Browse [Visuals](/visuals) for sketches and experiments. -->
+<!-- - Explore [Projects](/projects) for things I've built. -->
+<!-- - [Library](/library) collects books and references worth returning to. -->
+<!-- - [Self](/self) is where you'll find a little about me. -->
 
 <!-- @block(name="info") -->
 <!-- ::: {.info} -->
