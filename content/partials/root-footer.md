@@ -4,9 +4,9 @@ category: partials
 type: root-footer
 ---
 
-:::::: {.footer-text .prose}
+:::::: {.footer-text .flow}
 
-::: {.site-info}
+::: {.site-info .flow}
 
 **Asterisk**
 
