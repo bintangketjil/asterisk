@@ -54,26 +54,26 @@ When she reached the first hills of the Italic Mountains, she had a last view ba
 ::: {.recent-entries}
 
 [
-[Decision]{.post-title} \
-[26 Jul 2026 &middot; Notes]{.post-meta .metadata} \
-[Sometimes questioning yourself can be harmful.]{.post-desc} \
+[Decision]{.post-title}
+[26 Jul 2026 &middot; Notes]{.post-meta .metadata}
+[Sometimes questioning yourself can be harmful.]{.post-desc}
 ](link){.post}
 
 [
-[What We Talk About When We Talk About Love]{.post-title} \
-[23 Jul 2026 &middot; Review]{.post-meta .metadata} \
-[To talk using random words effectively reducing the chance of being killed by a lack of pride.]{.post-desc} \
+[What We Talk About When We Talk About Love]{.post-title}
+[23 Jul 2026 &middot; Review]{.post-meta .metadata}
+[To talk using random words effectively reducing the chance of being killed by a lack of pride.]{.post-desc}
 ](link){.post}
 
 [
-[Being and Time]{.post-title} \
-[30 Jun 2026 &middot; Essay]{.post-meta .metadata} \
-[The relieve by looking at the time is somewhat the reason banality and certain emotions sprout in your colleague.]{.post-desc} \
+[Being and Time]{.post-title}
+[30 Jun 2026 &middot; Essay]{.post-meta .metadata}
+[The relieve by looking at the time is somewhat the reason banality and certain emotions sprout in your colleague.]{.post-desc}
 ](link){.post}
 
 :::
 
-[...](link){.cta}
+[See All](link){.cta}
 
 ::::::
 

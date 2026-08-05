@@ -171,6 +171,8 @@
 
     :where(h1, h2, h3, h4):not([class]) {
 	font-size: inherit;
+    }
+    :where(h1, h2):not([class]) {
 	text-transform: uppercase;
     }
 
@@ -240,6 +242,7 @@
 	    }
 	}
     }
+
 }
 
 @layer utilities {
@@ -251,6 +254,10 @@
     }
     main p:last-of-type {
 	margin-bottom: calc(var(--spacing) * 0);
+    }
+
+    main section > :where(h1, h2, h3):first-child {
+	margin-block-end: var(--space-4);
     }
 
     .metadata {
@@ -296,5 +303,64 @@
 
     a .metadata {
 	font-size: var(--text-xs);
+    }
+
+    .recent-entries {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-5);
+	margin-block: var(--space-5);
+    }
+    .recent-entries a {
+	display: block;
+	text-decoration: none;
+	padding-block: var(--space-3);
+	position: relative;
+	& span {
+	    display: block;
+	    opacity: .8;
+	}
+	& *:last-of-type {
+	    display: block;
+	    margin-block-start: var(--space-3);
+	}
+	& .post-title {
+	    opacity: 1;
+	}
+	&:hover * {
+	    opacity: 1;
+	}
+    }
+    .recent-entries a:has(span) {
+	&::after {
+	    content: "";
+	    display: block;
+	    height: 1px;
+	    /* width: calc(100% - 5 * var(--gutter)); */
+	    width: 100%;
+	    background: black;
+	    position: absolute;
+	    left: 0;
+	    /* left: calc(2 * var(--gutter)); */
+	    bottom: calc(-1 * var(--space-3));
+	    opacity: .3;
+	}
+	&:hover {
+	    &::after {
+		opacity: .5;
+	    }
+	}
+    }
+    .recent-entries a:hover {
+	& .post-title {
+	    text-decoration: none;
+	}
+    }
+    .recent-entries .post-title {
+	text-decoration: underline;
+	font-family: var(--font-editorial);
+    }
+    .recent-entries .post-meta {
+	margin-block-start: var(--space-2);
     }
 }
