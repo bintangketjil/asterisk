@@ -3,115 +3,124 @@ title: Asterisk
 date: 2026-07-27
 category: page
 type: root-index
-css: /assets/static/css/main.css
+css: /assets/static/css/index.css
 ---
 
-<!-- @section(name="hero", class=".hero .container") hero -->
-
-
-<!-- @endsection -->
-
-
-<!-- @section(name="intro" class=".intro .container") -->
 :::::: {.section .intro .container}
 
-::: {.wizardfrog}
+![Wizard Frog greets you all.](/assets/static/images/frog0.svg){height="60"}
 
-![Wizard Frog greets you all.](/assets/static/images/frog0.svg "Wizard Frog"){height="60"}
+This is a small archive where a tiny sums of my [writings](link) can actually exist on the net, or I can put my collection of [references](link) for stuff that melts my brain, and some of my [projects](link) I decided to keep on doing. There are also [notes](link) inspired by evergreen notes, and [log](link) for regular updates regarding this site or myself.
+
+This site is supposedly rendered by [Artifact](links), a tiny publishing system that I've been developing since the fist `note.md`. Currently *n* entries have been published with the last update of: *x y z*. There is a [chronological view](link) of this site and there is also a [graph view](link).
+
+I hope you find something worth carrying with you.
+
+[See Latest](link){.cta} [Browse Archive](link){.cta}
+
+::: {.build-info .metadata}
+
+Epoch &middot; 2026 &mdash; Entry &middot; 0010
 
 :::
 
-What follows is a small archive of things that stayed with me long enough to be worth keeping. I hope you find something worth carrying with you.
+::::::
 
-Visit [Writings](/writings) for essays and notes.
-Browse [Visuals](/visuals) for sketches and experiments.
-Explore [Projects](/projects) for things I've built.
-[Library](/library) collects books and references worth returning to.
-[Self](/self) is where you'll find a little about me.
+:::::: {.section .feature .container}
+## Featured
 
-<!-- - Visit [Writings](/writings) for essays and notes. -->
-<!-- - Browse [Visuals](/visuals) for sketches and experiments. -->
-<!-- - Explore [Projects](/projects) for things I've built. -->
-<!-- - [Library](/library) collects books and references worth returning to. -->
-<!-- - [Self](/self) is where you'll find a little about me. -->
+[Whatever Works](link){.title}
 
-<!-- @block(name="info") -->
-<!-- ::: {.info} -->
+[or: How to Stay Put and Being on A Dream]{.subtitle}
 
-<!-- Updated 27 July 2026 &middot; 5 entries -->
+Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.
 
-<!-- ::: -->
-<!-- @endblock -->
+A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.
+
+Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.
+
+The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen. She packed her seven versalia, put her initial into the belt and made herself on the way.
+
+When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane.
+
+[Continue Reading](link){.cta}
 
 ::::::
-<!-- @endsection -->
 
 
-<!-- @section(name="recent", class=".intro .recent") -->
 :::::: {.section .recent .container}
 ## Recent
 
-<!-- @feed(source="recent-entries", limit=5) -->
-::: {.recent-entries .list-nostyle}
+::: {.recent-entries}
 
-- [Decision](/writings/notes/decision.html)
-  
-  26 July &middot; Note
-  
-  A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.
+[
+[Decision]{.post-title} \
+[26 Jul 2026 &middot; Notes]{.post-meta .metadata} \
+[Sometimes questioning yourself can be harmful.]{.post-desc} \
+](link){.post}
 
-- [What We Talk About When We Talk About Love](/writings/notes/decision.html)
-  
-  26 July &middot; Essay
-  
-  I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine.
+[
+[What We Talk About When We Talk About Love]{.post-title} \
+[23 Jul 2026 &middot; Review]{.post-meta .metadata} \
+[To talk using random words effectively reducing the chance of being killed by a lack of pride.]{.post-desc} \
+](link){.post}
 
-- [Being and Time](/writings/notes/decision.html)
-  
-  26 July &middot; Log
-  
-  I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at the present moment; and yet I feel that I never was a greater artist than now.
+[
+[Being and Time]{.post-title} \
+[30 Jun 2026 &middot; Essay]{.post-meta .metadata} \
+[The relieve by looking at the time is somewhat the reason banality and certain emotions sprout in your colleague.]{.post-desc} \
+](link){.post}
 
 :::
 
-[Browse Archive &rarr;](/archive){.cta}
+[...](link){.cta}
 
 ::::::
-<!-- @endsection -->
 
 
-<!-- @section(name="projects" class=".projects .container")-->
+:::::: {.section .now .container}
+## Now
+
+Some paragraph
+
+### Reading
+
+Some paragraph
+
+### Building
+
+Some paragraph
+
+### Learning
+
+Some paragraph
+
+::::::
+
+
 :::::: {.section .projects .container}
 ## Projects
 
-<!-- @feed(source="recent-projects", limit=2) -->
-::: {.recent-projects .list-nostyle}
+Here are some active projects.
 
-- [Artifact](/projects/artifact)
+- Artifact
   
   A Tiny Publishing System
   
-  Development &middot; Updated 26 July
-  
-- [Garden](/projects/garden)
+- Garden
   
   My Digital Garden
-  
-  Active &middot; Updated 25 July
-
-:::
-
-[See More &rarr;](/archive){.cta}
 
 ::::::
-<!-- @endsection -->
 
-<!-- @section(name="random", class=".random .container") -->
-:::::: {.section .random .container}
 
-## /r/
+:::::: {.section .Library .container}
+## Library
 
-Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.
+Recent additions
+
+- The Design of Everyday Things
+- Programming Pearls
+- The C Programming Language
 
 ::::::
-<!-- @endsection -->

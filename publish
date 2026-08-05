@@ -8,6 +8,7 @@ BUILD="build"
 ASSETS="assets/static"
 TEMPLATES="assets/templates"
 PARTIALS="content/partials"
+FILTER="utils/filter"
 
 ROOTFOOTER_SRC="$PARTIALS/root-footer.md"
 DEFFOOTER_SRC="$PARTIALS/footer.md"
@@ -31,7 +32,6 @@ ARTICLE_TEMPL="$TEMPLATES/article.html"
 
 PANDOC="pandoc"
 PANDOC_COMMON="-s"
-
 
 ARG=""
 
@@ -84,52 +84,53 @@ echo -e "[artifact] generate $DEFFOOTER_OUT"
 
 echo -e "[artifact] generate $INDEX_OUT"
 "$PANDOC" "$PANDOC_COMMON" \
+	  --lua-filter="$FILTER/unwrapper.lua" \
 	  --template="$BASE_TEMPL" \
 	  "$INDEX_SRC" \
 	  -o "$INDEX_OUT"
 
 
-echo -e "[artifact] generate $WRITINGS_OUT"
+# echo -e "[artifact] generate $WRITINGS_OUT"
 
-writings_out=$(dirname $WRITINGS_OUT)
+# writings_out=$(dirname $WRITINGS_OUT)
 
-if [ ! -d "$writings_out" ]; then
-    mkdir -p "$writings_out"
-fi
+# if [ ! -d "$writings_out" ]; then
+#     mkdir -p "$writings_out"
+# fi
 
-"$PANDOC" "$PANDOC_COMMON" \
-	  --template="$WRITINGS_TEMPL" \
-	  "$WRITINGS_SRC" \
-	  -o "$WRITINGS_OUT"
-
-
-echo -e "[artifact] generate $LOG_OUT"
-
-out=$(dirname $LOG_OUT)
-
-if [ ! -d "$out" ]; then
-    mkdir -p "$out"
-fi
-
-"$PANDOC" "$PANDOC_COMMON" \
-	  --template="$LOG_TEMPL" \
-	  "$LOG_SRC" \
-	  -o "$LOG_OUT"
+# "$PANDOC" "$PANDOC_COMMON" \
+# 	  --template="$WRITINGS_TEMPL" \
+# 	  "$WRITINGS_SRC" \
+# 	  -o "$WRITINGS_OUT"
 
 
-for note in content/writings/notes/*.md; do
-    if [ -f "$note" ]; then
-	filename=$(basename "$note")
-	slug="${filename%.*}.html"
-	out="$NOTES_OUT/$slug"
+# echo -e "[artifact] generate $LOG_OUT"
+
+# out=$(dirname $LOG_OUT)
+
+# if [ ! -d "$out" ]; then
+#     mkdir -p "$out"
+# fi
+
+# "$PANDOC" "$PANDOC_COMMON" \
+# 	  --template="$LOG_TEMPL" \
+# 	  "$LOG_SRC" \
+# 	  -o "$LOG_OUT"
+
+
+# for note in content/writings/notes/*.md; do
+#     if [ -f "$note" ]; then
+# 	filename=$(basename "$note")
+# 	slug="${filename%.*}.html"
+# 	out="$NOTES_OUT/$slug"
 	
-	echo -e "[artifact] generate $out"
+# 	echo -e "[artifact] generate $out"
 
-	mkdir -p "$NOTES_OUT"
+# 	mkdir -p "$NOTES_OUT"
 	
-	"$PANDOC" "$PANDOC_COMMON" \
-		  --template="$ARTICLE_TEMPL" \
-		  "$note" \
-		  -o "$out"
-    fi
-done
+# 	"$PANDOC" "$PANDOC_COMMON" \
+# 		  --template="$ARTICLE_TEMPL" \
+# 		  "$note" \
+# 		  -o "$out"
+#     fi
+# done
