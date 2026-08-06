@@ -131,7 +131,7 @@ I'm starting learning bash and Lua for building my project. And also digging som
 
 
 :::::: {.section .Library .container .counter}
-## Errata
+## Changelog
 
 Recent additions to the [library](link)
 

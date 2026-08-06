@@ -282,6 +282,10 @@
 	    color: var(--faint);
 	}
     }
+    main section.counter h2 {
+	font-size: 0.9rem;
+	letter-spacing: .05em;
+    }
 
     .metadata {
 	font-family: var(--font-sans), sans;
