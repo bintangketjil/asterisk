@@ -18,6 +18,21 @@ or: an inquiry into the meaning of mundane life
 :::::: {.log-entries}
 
 ::: {.section .article}
+## 06 Aug 2026 &ndash; 16:04 {.title}
+
+
+I slept for 11+ hours, I don't know if that's good or not. 
+I was dreaming of being on a new place, meeting new people, doing new stuff.
+I was so happy.
+
+Or not, I don't know the difference, in my dreams they tend to be blur of blobs, even feelings.
+
+Before fallen into sleep I was deciding to start to actually write things that make sense.
+Real entries. I hope I can do that every day, I think that's one of the goal. Finger crossed.
+
+:::
+
+::: {.section .article}
 ## 01 Aug 2026 &ndash; 15:00 {.title}
 
 [One way or another &middot; asterisk]{.subtitle}

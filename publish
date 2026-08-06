@@ -90,32 +90,32 @@ echo -e "[artifact] generate $INDEX_OUT"
 	  -o "$INDEX_OUT"
 
 
-# echo -e "[artifact] generate $WRITINGS_OUT"
+echo -e "[artifact] generate $WRITINGS_OUT"
 
-# writings_out=$(dirname $WRITINGS_OUT)
+writings_out=$(dirname $WRITINGS_OUT)
 
-# if [ ! -d "$writings_out" ]; then
-#     mkdir -p "$writings_out"
-# fi
+if [ ! -d "$writings_out" ]; then
+    mkdir -p "$writings_out"
+fi
 
-# "$PANDOC" "$PANDOC_COMMON" \
-# 	  --template="$WRITINGS_TEMPL" \
-# 	  "$WRITINGS_SRC" \
-# 	  -o "$WRITINGS_OUT"
+"$PANDOC" "$PANDOC_COMMON" \
+	  --template="$WRITINGS_TEMPL" \
+	  "$WRITINGS_SRC" \
+	  -o "$WRITINGS_OUT"
 
 
-# echo -e "[artifact] generate $LOG_OUT"
+echo -e "[artifact] generate $LOG_OUT"
 
-# out=$(dirname $LOG_OUT)
+out=$(dirname $LOG_OUT)
 
-# if [ ! -d "$out" ]; then
-#     mkdir -p "$out"
-# fi
+if [ ! -d "$out" ]; then
+    mkdir -p "$out"
+fi
 
-# "$PANDOC" "$PANDOC_COMMON" \
-# 	  --template="$LOG_TEMPL" \
-# 	  "$LOG_SRC" \
-# 	  -o "$LOG_OUT"
+"$PANDOC" "$PANDOC_COMMON" \
+	  --template="$LOG_TEMPL" \
+	  "$LOG_SRC" \
+	  -o "$LOG_OUT"
 
 
 # for note in content/writings/notes/*.md; do

@@ -3,10 +3,10 @@ title: Writings
 category: page
 type: writings
 date: 2026-07-31
-css: /assets/static/css/main.css
+css: /assets/static/css/style.css
 ---
 
-:::::: {.article .marginv-9}
+:::::: {.article}
 
 ::: {.section .article-intro .container}
 
