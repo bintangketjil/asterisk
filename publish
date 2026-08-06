@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 set -Eeuo pipefail
+# set -xe
 
 export PANDOC_DATA_DIR="assets/template"
 
@@ -8,14 +9,16 @@ BUILD="build"
 ASSETS="assets/static"
 TEMPLATES="assets/templates"
 PARTIALS="content/partials"
-FILTER="utils/filter"
+FILTER="./utils/filter"
 
+MAIN_HEADER_SRC="$PARTIALS/header.md"
 ROOTFOOTER_SRC="$PARTIALS/root-footer.md"
 DEFFOOTER_SRC="$PARTIALS/footer.md"
 INDEX_SRC="content/pages/index.md"
 WRITINGS_SRC="content/pages/writings.md"
 LOG_SRC="content/self/log.md"
 
+MAIN_HEADER_OUT="$TEMPLATES/gen-main-header.html"
 ROOTFOOTER_OUT="$TEMPLATES/root-footer.html"
 DEFFOOTER_OUT="$TEMPLATES/default-footer.html"
 ASSETS_OUT="$BUILD/assets"
@@ -54,6 +57,42 @@ if [ "$ARG" = "clean" ]; then
     fi
 fi
 
+discover_files() {
+    ROOT="${1:-content}"
+
+    if [[ ! -d "$ROOT"  ]]; then
+	echo "error: directory not found: $ROOT" >&2
+	exit 1
+    fi
+
+    find "$ROOT" -type f -name '*.md' -print
+}
+
+build_assets() {
+    echo "[artifact] copy '$ASSETS' to '$ASSETS_OUT'"
+
+    if [ -d "$ASSETS" ]; then
+	mkdir -p "$ASSETS_OUT"
+	cp -ruT "$ASSETS" "$ASSETS_OUT/static"
+    fi
+}
+
+render() {
+    input="$1"
+    output="$2"
+    template="$3"
+    filter="${4}"
+
+    echo "[artifact] generate $output"
+    
+    "$PANDOC" "$PANDOC_COMMON" \
+	      "$input" \
+	      --template="$template" \
+	      -o "$output" \
+	      --lua-filter="$filter"
+}
+
+
 
 if [ ! -d "$BUILD" ]; then
     echo "[artifact] create '$BUILD' directory"
@@ -61,76 +100,14 @@ if [ ! -d "$BUILD" ]; then
 fi
 
 
-echo "[copy] '$ASSETS' to '$ASSETS_OUT'"
-if [ -d "$ASSETS" ]; then
-    mkdir -p "$ASSETS_OUT"
-    cp -ruT "$ASSETS" "$ASSETS_OUT/static"
-fi
+build_assets
 
+render "$MAIN_HEADER_SRC" \
+       "$MAIN_HEADER_OUT" \
+       "$TEMPLATES/header.html" \
+       "$FILTER/unwrapper.lua"
 
-echo -e "[artifact] generate $ROOTFOOTER_OUT"
-"$PANDOC" "$PANDOC_COMMON" \
-	  --template="$FOOTER_TEMPL" \
-	  "$ROOTFOOTER_SRC" \
-	  -o "$ROOTFOOTER_OUT"
-
-
-echo -e "[artifact] generate $DEFFOOTER_OUT"
-"$PANDOC" "$PANDOC_COMMON" \
-	  --template="$FOOTER_TEMPL" \
-	  "$DEFFOOTER_SRC" \
-	  -o "$DEFFOOTER_OUT"
-
-
-echo -e "[artifact] generate $INDEX_OUT"
-"$PANDOC" "$PANDOC_COMMON" \
-	  --lua-filter="$FILTER/unwrapper.lua" \
-	  --template="$BASE_TEMPL" \
-	  "$INDEX_SRC" \
-	  -o "$INDEX_OUT"
-
-
-echo -e "[artifact] generate $WRITINGS_OUT"
-
-writings_out=$(dirname $WRITINGS_OUT)
-
-if [ ! -d "$writings_out" ]; then
-    mkdir -p "$writings_out"
-fi
-
-"$PANDOC" "$PANDOC_COMMON" \
-	  --template="$WRITINGS_TEMPL" \
-	  "$WRITINGS_SRC" \
-	  -o "$WRITINGS_OUT"
-
-
-echo -e "[artifact] generate $LOG_OUT"
-
-out=$(dirname $LOG_OUT)
-
-if [ ! -d "$out" ]; then
-    mkdir -p "$out"
-fi
-
-"$PANDOC" "$PANDOC_COMMON" \
-	  --template="$LOG_TEMPL" \
-	  "$LOG_SRC" \
-	  -o "$LOG_OUT"
-
-
-# for note in content/writings/notes/*.md; do
-#     if [ -f "$note" ]; then
-# 	filename=$(basename "$note")
-# 	slug="${filename%.*}.html"
-# 	out="$NOTES_OUT/$slug"
-	
-# 	echo -e "[artifact] generate $out"
-
-# 	mkdir -p "$NOTES_OUT"
-	
-# 	"$PANDOC" "$PANDOC_COMMON" \
-# 		  --template="$ARTICLE_TEMPL" \
-# 		  "$note" \
-# 		  -o "$out"
-#     fi
-# done
+render "$INDEX_SRC" \
+       "$INDEX_OUT" \
+       "$BASE_TEMPL" \
+       "$FILTER/unwrapper.lua"
