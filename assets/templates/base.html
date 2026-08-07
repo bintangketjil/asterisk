@@ -4,21 +4,15 @@
   ${site-head()}
 
   <body>
-    $for(include-before)$
-    $include-before$
-    $endfor$
-    
-    ${main-header()}
+    <div class="container">
+
+    ${gen-main-header()}
     
     <main class="site-main">
       $body$
     </main>
 
-    $for(include-after)$
-    $include-after$
-    $endfor$
-
-
+    </div>
   </body>
 
 </html>
