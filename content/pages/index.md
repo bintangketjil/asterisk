@@ -61,7 +61,7 @@ Far far away, behind the word mountains, far from the countries Vokalia and Cons
 :::::: {.section .recent .container .counter}
 ## Recently
 
-:::: {tag="a" .card href="#"}
+:::: {tag="a" .card href="/"}
 
 ::: {.article}
 

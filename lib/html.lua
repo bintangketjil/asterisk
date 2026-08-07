@@ -1,4 +1,5 @@
--- html.lua
+-- lib/html.lua
+-- html escaping
 
 local html = {}
 
@@ -10,7 +11,7 @@ local function escape(value)
    value = value:gsub("<", "&lt;")
    value = value:gsub(">", "&gt;")
 
-   return value;
+   return value
 end
 
 function html.attributes(attrs)
@@ -21,14 +22,11 @@ function html.attributes(attrs)
    local output = {}
 
    for key, value in pairs(attrs) do
-      table.insert(
-	 output,
-	 string.format(
-	    '%s="%s"',
-	    key,
-	    escape(value)
-	 )
-      )
+      output[#output + 1] = string.format(
+	 '%s="%s"',
+	 key,
+	 escape(value)
+					 )
    end
 
    if #output == 0 then
@@ -40,6 +38,7 @@ end
 
 function html.element(tag, attrs, content)
    assert(tag, "html.element requires a tag")
+
    return table.concat({
 	 "<",
 	 tag,
@@ -52,7 +51,6 @@ function html.element(tag, attrs, content)
 	 tag,
 	 ">"
    })
-
 end
 
 return html

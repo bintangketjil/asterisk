@@ -30,7 +30,7 @@ BUILD="build"
 ASSETS="assets/static"
 TEMPLATES="assets/templates"
 PARTIALS="content/partials"
-FILTER="./utils/filter"
+FILTER="./lib/filter"
 
 MAIN_HEADER_SRC="$PARTIALS/header.md"
 ROOTFOOTER_SRC="$PARTIALS/root-footer.md"
