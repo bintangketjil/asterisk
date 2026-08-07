@@ -1,7 +1,28 @@
 #!/usr/bin/env bash
 
-set -Eeuo pipefail
-# set -xe
+
+VERBOSE=0
+ARG=""
+
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+	--verbose|-v)
+	    VERBOSE=1
+	    ;;
+	*)
+	    ARG="$1"
+	    ;;
+    esac
+
+    shift
+done
+
+
+if (( VERBOSE )); then
+    set -xe
+else
+    set -Eeuo pipefail
+fi
 
 export PANDOC_DATA_DIR="assets/template"
 
@@ -36,11 +57,7 @@ ARTICLE_TEMPL="$TEMPLATES/article.html"
 PANDOC="pandoc"
 PANDOC_COMMON="-s"
 
-ARG=""
 
-if [ $# -ge 1 ]; then
-    ARG="$1"
-fi
 
 if [ "$ARG" = "clean" ]; then
     if [ -d "$BUILD" ]; then
@@ -81,15 +98,17 @@ render() {
     input="$1"
     output="$2"
     template="$3"
-    filter="${4}"
-
-    echo "[artifact] generate $output"
+    filter="$4"
+    shift 4
     
+    echo "[artifact] generate $output"
+
     "$PANDOC" "$PANDOC_COMMON" \
 	      "$input" \
 	      --template="$template" \
 	      -o "$output" \
-	      --lua-filter="$filter"
+	      --lua-filter="$filter" \
+	      "$@"
 }
 
 
@@ -105,9 +124,10 @@ build_assets
 render "$MAIN_HEADER_SRC" \
        "$MAIN_HEADER_OUT" \
        "$TEMPLATES/header.html" \
-       "$FILTER/unwrapper.lua"
+       "$FILTER/unwrapper.lua" \
 
 render "$INDEX_SRC" \
        "$INDEX_OUT" \
        "$BASE_TEMPL" \
-       "$FILTER/unwrapper.lua"
+       "$FILTER/unwrapper.lua" \
+       "--lua-filter=$FILTER/element.lua"

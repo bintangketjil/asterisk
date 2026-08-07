@@ -1,10 +1,10 @@
-package.path = package.path .. ";libs/?.lua;?.lua"
+package.path = package.path .. ";utils/?.lua;?.lua"
 
 local html = require("html")
 
 local render = {}
 
-local function render_div(el)
+local function render_element(el)
    local tag = el.attributes.tag
 
    if not tag then
@@ -31,7 +31,7 @@ local function render_div(el)
       attrs.class = table.concat(classes, " ")
    end
 
-   local content = render.blocks(el.content)
+   local content = render.body(el.content)
 
    return html.element(
       tag,
@@ -42,28 +42,35 @@ end
 
 function render.block(block)
    if block.t == "Div" then
-      local result = render_div(block)
+      if block.attributes.tag then
+	 return render_element(block)
+      end
 
-      if result then
-	 return result
+      if inside_element then
+	 return nil
       end
    end
 
-   local doc = pandoc.Pandoc({block})
-
-   return pandoc.write(
-      doc,
-      "html"
-   )
+   return nil
 end
 
-function render.blocks(blocks)
+function render.body(blocks)
    local output = {}
 
    for _, block in ipairs(blocks) do
       local result = render.block(block)
 
-      table.insert(output, result)
+      if result then
+	 table.insert(output, result)
+      else
+	 table.insert(
+	    output,
+	    pandoc.write(
+	       pandoc.Pandoc({block}),
+	       "html"
+	    )
+	 )
+      end
    end
 
    return table.concat(output, "\n")
