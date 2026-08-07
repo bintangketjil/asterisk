@@ -1,7 +1,7 @@
 local targets = {
    "Image",
    "Link",
-   "LineBreak"
+   "LineBreak",
 }
 
 function Para(element)
