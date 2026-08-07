@@ -1,4 +1,4 @@
-package.path = package.path .. ";utils/?.lua;"
+-- walker.lua
 
 local renderer = require("renderer")
 

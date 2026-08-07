@@ -1,4 +1,4 @@
-package.path = package.path .. ";./utils/?.lua;./utils/?/init.lua"
+-- init.lua
 
 local renderer = {}
 

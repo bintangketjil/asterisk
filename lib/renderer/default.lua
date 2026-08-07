@@ -1,3 +1,5 @@
+-- default.lua
+
 local default = {}
 
 return function(block)

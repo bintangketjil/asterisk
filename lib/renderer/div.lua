@@ -1,5 +1,4 @@
-print(package.searchpath("html", package.path))
-print(package.searchpath("renderer.html", package.path))
+-- div.lua
 
 local html = require("html")
 
