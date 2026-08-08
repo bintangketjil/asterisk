@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-
 VERBOSE=0
 ARG=""
 
@@ -8,6 +7,9 @@ while [[ $# -gt 0 ]]; do
     case "$1" in
 	--verbose|-v)
 	    VERBOSE=1
+	    ;;
+	"clean")
+	    build_clean
 	    ;;
 	*)
 	    ARG="$1"
@@ -17,49 +19,14 @@ while [[ $# -gt 0 ]]; do
     shift
 done
 
-
 if (( VERBOSE )); then
     set -xe
 else
     set -Eeuo pipefail
 fi
 
-export PANDOC_DATA_DIR="assets/template"
 
-BUILD="build"
-ASSETS="assets/static"
-TEMPLATES="assets/templates"
-PARTIALS="content/partials"
-FILTER="./lib/filter"
-
-MAIN_HEADER_SRC="$PARTIALS/header.md"
-ROOTFOOTER_SRC="$PARTIALS/root-footer.md"
-DEFFOOTER_SRC="$PARTIALS/footer.md"
-INDEX_SRC="content/pages/index.md"
-WRITINGS_SRC="content/pages/writings.md"
-LOG_SRC="content/self/log.md"
-
-MAIN_HEADER_OUT="$TEMPLATES/gen-main-header.html"
-ROOTFOOTER_OUT="$TEMPLATES/root-footer.html"
-DEFFOOTER_OUT="$TEMPLATES/default-footer.html"
-ASSETS_OUT="$BUILD/assets"
-INDEX_OUT="$BUILD/index.html"
-WRITINGS_OUT="$BUILD/writings/index.html"
-NOTES_OUT="$BUILD/writings/notes"
-LOG_OUT="$BUILD/self/log/index.html"
-
-FOOTER_TEMPL="$TEMPLATES/footer.html"
-BASE_TEMPL="$TEMPLATES/base.html"
-WRITINGS_TEMPL="$TEMPLATES/writings.html"
-LOG_TEMPL="$TEMPLATES/log.html"
-ARTICLE_TEMPL="$TEMPLATES/article.html"
-
-PANDOC="pandoc"
-PANDOC_COMMON="-s"
-
-
-
-if [ "$ARG" = "clean" ]; then
+build_clean() {
     if [ -d "$BUILD" ]; then
 	if rm -rf "$BUILD"; then
 	    echo "[artifact] '$BUILD' dir removed"
@@ -72,7 +39,7 @@ if [ "$ARG" = "clean" ]; then
 	echo "[SKIP] '$BUILD' dir was already removed"
 	exit 0
     fi
-fi
+}
 
 discover_files() {
     ROOT="${1:-content}"
@@ -112,6 +79,19 @@ render() {
 }
 
 
+
+# config
+
+export PANDOC_DATA_DIR="templates"
+
+BUILD="build"
+TEMPLATE="templates"
+
+
+exit 0
+
+
+# begin
 
 if [ ! -d "$BUILD" ]; then
     echo "[artifact] create '$BUILD' directory"
