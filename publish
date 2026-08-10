@@ -94,7 +94,7 @@ generate() {
 	    -o "${page[out]}"
 	)
 
-	if [[ ${page[standalone]} == true ]]; then
+	if [[ ${page[standalone]:-} == true ]]; then
 	    cmd+=(--standalone)
 	fi
 
