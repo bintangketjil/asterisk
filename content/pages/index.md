@@ -6,7 +6,7 @@ type: root-index
 css: /assets/static/css/style.css
 ---
 
-:::::: {.section .intro .container}
+:::::: {tag="section" .intro .container}
 
 :::: {.intro-text}
 
@@ -22,7 +22,7 @@ I hope you find something worth carrying with you.
 
 :::
 
-::: {.block .aside}
+::: {tag="aside" .site-info}
 
 Epoch &middot; 2026\
 Entry &middot; 0010
@@ -43,7 +43,7 @@ Notes are for understanding, projects are for making, logs are for remembering.
 
 ::::::
 
-:::::: {.section .featured .container .counter}
+:::::: {tag="section" .featured .container .counter}
 ## Featured
 
 [26 Jul 2026 &middot; Notes]{.post-date .metadata}
@@ -58,52 +58,64 @@ Far far away, behind the word mountains, far from the countries Vokalia and Cons
 
 ::::::
 
-:::::: {.section .recent .container .counter}
+:::::: {tag="section" .recent .container .counter}
 ## Recently
 
-:::: {tag="a" .card href="/"}
+::::: {.recent-post}
 
-::: {.article}
+:::: {tag="a" href="link" .post-link}
+::: {.post-entry}
+::: {.flex .baseline .between}
+[Decision]{.title}
 
-Decision
-
-26 Jul 2026 &middot; Notes
-
+[30 Jul 2026 &middot; Notes]{.post-meta .metadata}
 :::
 
+[Sometimes the truth is harder than what it appears to be.]{.post-desc}
+:::
+::::
+
+:::: {tag="a" href="link" .post-link}
+::: {.post-entry}
+::: {.flex .baseline .between}
+[What We Talk About When We Talk About Love]{.title}
+
+[26 Jul 2026 &middot; Review]{.post-meta .metadata}
+:::
+
+[The agony of withered conversations is the way it makes us feel.]{.post-desc}
+:::
+::::
+
+:::: {tag="a" href="link" .post-link}
+::: {.post-entry}
+::: {.flex .baseline .between}
+[Being and Time]{.title}
+
+[16 Jul 2026 &middot; Essay]{.post-meta .metadata}
+:::
+
+[Cultivating lateness in the brink of collapsed work ethics.]{.post-desc}
+:::
+::::
 
 :::::
 
+:::: {tag="div" .marginy-4}
 [See All](link){.cta}
+::::
 
 ::::::
 
 
-:::::: {.section .projects .container .counter}
-## Projects
+:::::: {tag="section" .recent .container .counter}
+## Currently
 
-::: {.project-card .asterisk}
+### Building
 
-[[Asterisk](link)]{.card-title}
+Currently I'm tinkering with bash, Lua, and Markdown. I am trying to build a system where I can write with no effort but can present it wholefully. See [Projects](link) for details.
 
-[A tiny publishing system.]{.description}
-
-[Development &middot; 30 Jul 2026]{.muted}
-
-[Source](link) &middot; [About](link)
-
-:::
+### Reading
 
 ::::::
 
-
-:::::: {.section .Library .container .counter}
-## Changelog
-
-Recent additions to the [library](link)
-
-- The Design of Everyday Things
-- Programming Pearls
-- The C Programming Language
-
-::::::

@@ -3,31 +3,6 @@
 # prototype for artifact
 # building side
 
-VERBOSE=0
-ARG=""
-
-while [[ $# -gt 0 ]]; do
-    case "$1" in
-	--verbose|-v)
-	    VERBOSE=1
-	    ;;
-	clean)
-	    build_clean
-	    ;;
-	*)
-	    ARG="$1"
-	    ;;
-    esac
-
-    shift
-done
-
-if (( VERBOSE )); then
-    set -xe
-else
-    set -Eeuo pipefail
-fi
-
 
 build_clean() {
     if [ -d "$BUILD" ]; then
@@ -44,6 +19,7 @@ build_clean() {
     fi
 }
 
+
 discover_files() {
     ROOT="${1:-content}"
 
@@ -54,6 +30,7 @@ discover_files() {
 
     find "$ROOT" -type f -name '*.md' -print
 }
+
 
 build_assets() {
     echo "[artifact] copy '$ASSETS' to '$ASSETS_OUT'"
@@ -73,6 +50,7 @@ is_assoc() {
     [[ "$decl" == "declare -A"* ]]
 }
 
+
 is_array() {
     local decl
     
@@ -80,6 +58,7 @@ is_array() {
 
     [[ "$decl" == "declare -a"* ]]
 }
+
 
 generate() {
     local input="$1"
@@ -178,10 +157,36 @@ pages=(
 
 ## begin
 
+VERBOSE=0
+ARG=""
+
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+	--verbose|-v)
+	    VERBOSE=1
+	    ;;
+	clean)
+	    build_clean
+	    ;;
+	*)
+	    ARG="$1"
+	    ;;
+    esac
+
+    shift
+done
+
+if (( VERBOSE )); then
+    set -xe
+else
+    set -Eeuo pipefail
+fi
+
 if [ ! -d "$BUILD" ]; then
     echo "[artifact] create '$BUILD' directory"
     mkdir -p "$BUILD"
 fi
+
 
 build_assets
 
