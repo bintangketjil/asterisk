@@ -15,6 +15,7 @@ local allowed = {
    nav = true,
    section = true,
    div = true,
+   p = true,
    span = true,
 }
 
