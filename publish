@@ -7,41 +7,67 @@ RED='\033[0;31m'
 YELLOW='\033[1;33m'
 NC='\033[0m'
 
-build_clean() {
-    if [ -d "$BUILD" ]; then
-	if rm -rf "$BUILD"; then
-	    echo "[remove] '$BUILD' dir"
+
+clean() {
+    if [ -d "$build" ]; then
+	if rm -rf "$build"; then
+	    echo "[remove] $build"
 	    exit 0
-	else
-	    exit "[error] cannot remove '$BUILD' dir ..."
-	    exit 1
 	fi
     else
-	echo "[skip] '$BUILD' dir was already removed"
+	echo "[skip] $build already removed"
 	exit 0
     fi
 }
 
+build() {
+    local input="$1"
 
-discover_files() {
-    ROOT="${1:-content}"
+    declare -n ref="$input"
 
-    if [[ ! -d "$ROOT"  ]]; then
-	echo "error: directory not found: $ROOT" >&2
-	exit 1
-    fi
+    case "$input" in
+	assets)
+	    ref_src="${ref[src]}"
+	    ref_out="${ref[out]}"
 
-    find "$ROOT" -type f -name '*.md' -print
+	    if [[ ! -d "$ref_out" ]]; then
+		mkdir -p -- "$ref_out"
+	    else
+		echo "[copy] $ref_out"
+		cp -ruT "$ref_src" "$ref_out"
+	    fi
+	    ;;
+	*)
+	    echo "what to build?"
+	    ;;
+    esac
 }
 
 
-build_assets() {
-    echo "[copy] '$ASSETS' to '$ASSETS_OUT'"
-    echo
-    
-    if [ -d "$ASSETS" ]; then
-	mkdir -p "$ASSETS_OUT"
-	cp -ruT "$ASSETS" "$ASSETS_OUT"
+tree() {
+    local node="$1"
+
+    declare -n ref="$node"
+
+    local arr_len="${#ref[@]}"
+    local arr_val="${ref[@]}"
+
+    if is_array "$node"; then
+	printf "\n# %s\n" "$node (arr)"
+
+	if (( "arr_len" )); then
+	    printf "  + child: (%s)\n" "$arr_val"
+
+	    for i in "${!ref[@]}"; do
+		tree "${ref[i]}"
+	    done
+	fi
+
+    elif is_assoc "$node"; then
+	assoc_key="${!ref[@]}"
+	assoc_val="${ref[@]}"
+	printf "    - %s\n" "$node (assoc)"
+	printf '      [%s]\n' "$assoc_key"
     fi
 }
 
@@ -64,72 +90,119 @@ is_array() {
 }
 
 
+log() {
+    if (( VERBOSE )); then
+	echo -e "$1"
+    fi
+}
+
+
+is_container() {
+    is_array "$1"
+}
+
+
+walk() {
+    local node="$1"
+    local callback="$2"
+    shift 2
+
+    if is_container "$node"; then
+	declare -n ref="$node"
+
+	for child in "${ref[@]}"; do
+	    walk "$child" "$callback" "$@"
+	done
+    else
+	"$callback" "$node" "$@"
+    fi
+}
+
+
+count_node() {
+    local node="$1"
+    local -n assoc="$node"
+    local -n count="$2"
+
+    [[ "${assoc[out]}" ]] && count=$((count + 1))
+}
+
+
+count() {
+    local input="$1"
+    local -i result=0
+
+    walk "$input" count_node result
+
+    echo "$result"
+}
+
+
+stats() {
+    local input="$1"
+    local -i count=0
+
+    walk "$input" check_node count
+
+    printf '\nGenerated: %d\n' "$count"
+}
+
+
 generate() {
     local input="$1"
-    shift
 
-    if [ ! -d "$BUILD" ]; then
-	echo "[warning] '$BUILD' directory is not found"
-	echo "[create] $BUILD"
-	echo
-	
-	mkdir -p "$BUILD"
+    declare -A stats=(
+	[success]=0
+	[failed]=0
+    )
+
+    walk "$input" generate_node stats
+
+    printf '\nGenerated: %d\n' "${stats[success]}"
+    printf 'Failed: %d\n' "${stats[failed]}"
+}
+
+
+generate_node() {
+    local node="$1"
+    local dir
+    declare -n page="$node"
+
+    dir=$(dirname -- "${page[out]}")
+
+    if [[ ! -d "$dir" ]]; then
+	echo "[create] $dir"
+	mkdir -p -- "$dir"
+
     fi
 
-    if is_assoc "$input"; then
-	declare -n page="$input"
+    local cmd=(
+	pandoc
+	"${page[src]}"
+	-o "${page[out]}"
+    )
 
-	echo "[generate] $input"
+    if [[ ${page[standalone]:-} == true ]]; then
+	cmd+=(--standalone)
+    fi
 
-	local cmd=(
-	    pandoc
-	    "${page[src]}"
-	    -o "${page[out]}"
-	)
+    [[ ${page[templ]+_} ]] && cmd+=(--template="${page[templ]}")
 
-	if [[ ${page[standalone]:-} == true ]]; then
-	    cmd+=(--standalone)
-	fi
+    if [[ ${page[filters]+_} ]]; then
+	declare -n filters="${page[filters]}"
 
-	[[ ${page[templ]+_} ]] && cmd+=(--template="${page[templ]}")
-
-
-	if [[ ${page[filters]+_} ]]; then
-	    declare -n filters="${page[filters]}"
-	    
-	    for filter in "${filters[@]}"; do
-		cmd+=(--lua-filter="$filter")
-	    done
-	fi
-
-	local dir=$(dirname ${page[out]})
-
-	if [[ ! -d "$dir" ]]; then
-	    echo -e "${YELLOW}[warning]${NC} $dir directory is not found"
-	    echo "[create] $dir"
-	    echo
-	    
-	    # mkdir -p "$dir"
-	fi
-	
-	# "${cmd[@]}"
-
-	echo "+ ${page[out]}"
-	echo
-	
-    elif is_array "$input"; then
-	declare -n items="$input"
-	
-	for item in "${items[@]}"; do
-	    generate "$item"
+	for filter in "${filters[@]}"; do
+	    cmd+=(--lua-filter="$filter")
 	done
-
-    else
-	pandoc "$input" "$@"
-
-	echo "[artifact] generate $input"
     fi
 
+    if "${cmd[@]}"; then
+	printf '[ok] %s\n' "${page[out]}"
+	stats[success]=$((stats[success] + 1))
+    else
+	printf '[err] %s -> %s\n' "$node" "${page[out]}"
+	stats[failed]=$((stats[failed] + 1))
+    fi
 }
 
 
@@ -137,16 +210,20 @@ generate() {
 
 export PANDOC_DATA_DIR="templates"
 
-BUILD="build"
-ASSETS="assets"
-ASSETS_OUT="build/assets/static"
+build="build"
 
 base_filters=(
     "lib/filter/unwrapper.lua"
 )
+
 page_filters=(
     "lib/filter/unwrapper.lua"
     "lib/filter/element.lua"
+)
+
+declare -A assets=(
+    [src]="assets"
+    [out]="build/static"
 )
 
 declare -A header_root=(
@@ -193,6 +270,7 @@ all=(
     pages
 )
 
+
 ## begin
 
 VERBOSE=0
@@ -204,7 +282,7 @@ while [[ $# -gt 0 ]]; do
 	    VERBOSE=1
 	    ;;
 	clean)
-	    build_clean
+	    clean
 	    ;;
 	*)
 	    echo -e "${RED}[abort]${NC} command not found"
@@ -223,52 +301,6 @@ else
     set -Eeuo pipefail
 fi
 
+build assets
 
-# build_assets
-
-# generate partials
-
-# generate pages
-
-# generate all
-
-find_assoc() {
-    
-}
-
-count_pages() {
-    local input="$1"
-    declare -i count=0
-
-    if [ ! -v "$input" ] && ! is_assoc "$input"; then
-	echo "Err: $input: No such variable or array"
-
-    elif ! is_assoc "$input"; then
-	echo "$input is not Assoc"
-
-	declare -n input="$1"
-
-	for i in "${input[@]}"; do
-	    if ! is_assoc "$i"; then
-		echo "  $i is not Assoc"
-		count_pages "$i"
-	    else
-		echo "  $i is Assoc"
-		declare -n j="$i"
-		[[ "${j[out]}" ]] && count=$((count + 1))
-	    fi
-	done
-    else
-	echo "$input is Assoc"
-
-	declare -n input="$input"
-
-	[[ "${input[out]}" ]] && count=$((count + 1))
-    fi
-
-    echo
-    echo "Output: $count"
-}
-
-count_pages all
-
+generate all
