@@ -3,18 +3,21 @@
 # prototype for artifact
 # building side
 
+RED='\033[0;31m'
+YELLOW='\033[1;33m'
+NC='\033[0m'
 
 build_clean() {
     if [ -d "$BUILD" ]; then
 	if rm -rf "$BUILD"; then
-	    echo "[artifact] '$BUILD' dir removed"
+	    echo "[remove] '$BUILD' dir"
 	    exit 0
 	else
-	    exit "[ERROR] cannot remove '$BUILD' dir ..."
+	    exit "[error] cannot remove '$BUILD' dir ..."
 	    exit 1
 	fi
     else
-	echo "[SKIP] '$BUILD' dir was already removed"
+	echo "[skip] '$BUILD' dir was already removed"
 	exit 0
     fi
 }
@@ -33,8 +36,9 @@ discover_files() {
 
 
 build_assets() {
-    echo "[artifact] copy '$ASSETS' to '$ASSETS_OUT'"
-
+    echo "[copy] '$ASSETS' to '$ASSETS_OUT'"
+    echo
+    
     if [ -d "$ASSETS" ]; then
 	mkdir -p "$ASSETS_OUT"
 	cp -ruT "$ASSETS" "$ASSETS_OUT"
@@ -63,10 +67,20 @@ is_array() {
 generate() {
     local input="$1"
     shift
-    
+
+    if [ ! -d "$BUILD" ]; then
+	echo "[warning] '$BUILD' directory is not found"
+	echo "[create] $BUILD"
+	echo
+	
+	mkdir -p "$BUILD"
+    fi
+
     if is_assoc "$input"; then
 	declare -n page="$input"
-	
+
+	echo "[generate] $input"
+
 	local cmd=(
 	    pandoc
 	    "${page[src]}"
@@ -88,9 +102,20 @@ generate() {
 	    done
 	fi
 
-	"${cmd[@]}"
+	local dir=$(dirname ${page[out]})
 
-	echo "[artifact] generate ${page[out]}"
+	if [[ ! -d "$dir" ]]; then
+	    echo -e "${YELLOW}[warning]${NC} $dir directory is not found"
+	    echo "[create] $dir"
+	    echo
+	    
+	    # mkdir -p "$dir"
+	fi
+	
+	# "${cmd[@]}"
+
+	echo "+ ${page[out]}"
+	echo
 	
     elif is_array "$input"; then
 	declare -n items="$input"
@@ -104,6 +129,7 @@ generate() {
 
 	echo "[artifact] generate $input"
     fi
+
 }
 
 
@@ -162,6 +188,10 @@ pages=(
     index_writings
 )
 
+all=(
+    partials
+    pages
+)
 
 ## begin
 
@@ -177,7 +207,10 @@ while [[ $# -gt 0 ]]; do
 	    build_clean
 	    ;;
 	*)
-	    ARG="$1"
+	    echo -e "${RED}[abort]${NC} command not found"
+	    # usage
+	    
+	    exit 0
 	    ;;
     esac
 
@@ -190,14 +223,52 @@ else
     set -Eeuo pipefail
 fi
 
-if [ ! -d "$BUILD" ]; then
-    echo "[artifact] create '$BUILD' directory"
-    mkdir -p "$BUILD"
-fi
 
+# build_assets
 
-build_assets
+# generate partials
 
-generate partials
+# generate pages
 
-generate pages
+# generate all
+
+find_assoc() {
+    
+}
+
+count_pages() {
+    local input="$1"
+    declare -i count=0
+
+    if [ ! -v "$input" ] && ! is_assoc "$input"; then
+	echo "Err: $input: No such variable or array"
+
+    elif ! is_assoc "$input"; then
+	echo "$input is not Assoc"
+
+	declare -n input="$1"
+
+	for i in "${input[@]}"; do
+	    if ! is_assoc "$i"; then
+		echo "  $i is not Assoc"
+		count_pages "$i"
+	    else
+		echo "  $i is Assoc"
+		declare -n j="$i"
+		[[ "${j[out]}" ]] && count=$((count + 1))
+	    fi
+	done
+    else
+	echo "$input is Assoc"
+
+	declare -n input="$input"
+
+	[[ "${input[out]}" ]] && count=$((count + 1))
+    fi
+
+    echo
+    echo "Output: $count"
+}
+
+count_pages all
+
