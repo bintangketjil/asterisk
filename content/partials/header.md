@@ -1,7 +1,7 @@
 ---
 title: header
 category: partials
-type: root-header
+type: header-root
 ---
 
 :::::: {.left}

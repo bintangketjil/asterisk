@@ -6,69 +6,39 @@ date: 2026-07-31
 css: /assets/static/css/style.css
 ---
 
-:::::: {.article}
-
-::: {.section .article-intro .container}
-
+::::: {.container}
 # Writings
 
-Some paragraph
+Long-form writing on some [topics](link). Some of it are final while others are not.
 
+:::: {.grid .split .al-baseline .gap-4 .marginy-7}
+::: {tag="aside" .muted .borderl}
+10 entries across:
+
+- [Essay](link)
+- [Poem](link)
+- [Review](link)
+- [Guide](link)
+
+\
+
+[Graph &nearr;](link)
 :::
 
-
-::: {.section .essay .container}
-
-## [Essays](/writings/essays) 2
-
-Another paragraph
-
-::: {.list-nostyle .entry-list}
-
-@feed(source="essays-list")
-
-- [Decision](/writings/essays/what-we-talk-about){.entry-title .side}
-  []{.liner}
-  [26 Jul 2026]{.entry-date .side}
-- [What We Talk About When We Talk About Love](/writings/essays/what-we-talk-about){.entry-title .side}
-  []{.liner}
-  [01 Jul 2026]{.entry-date .side}
-- [Being and Time](/writings/essays/what-we-talk-about){.entry-title .side}
-  []{.liner}
-  [21 Jun 2026]{.entry-date .side}
-
-
-
+::: {.list-nostyle .li-marginy-3}
+* ## 2026
+  
+  + [08/08]{.meta} &middot; [Decision](link)
+  + [01/08]{.meta} &middot; [What We Talk About When We Talk About Love](link)
+  + [26/07]{.meta} &middot; [Being and Time](link)
+  + [08/08]{.meta} &middot; [Decision](link)
+  + [01/08]{.meta} &middot; [What We Talk About When We Talk About Love](link)
+  + [26/07]{.meta} &middot; [Being and Time](link)
+  + [08/08]{.meta} &middot; [Decision](link)
+  + [01/08]{.meta} &middot; [What We Talk About When We Talk About Love](link)
+  + [26/07]{.meta} &middot; [Being and Time](link)
+  + [08/08]{.meta} &middot; [Decision](link)
+  + [01/08]{.meta} &middot; [What We Talk About When We Talk About Love](link)
 :::
-
-:::
-
-
-::: {.section .notes .container}
-
-## [Notes](/writings/notes) 3
-
-Paragraph about this and that
-
-@feed(source="notes-list")
-
-:::
-
-::: {.section .reviews .container}
-
-## [Reviews](/writings/reviews) 1
-
-Small reviews
-
-:::
-
-
-::: {.section .guide .container}
-
-## [Guide](/writings/guide) 3
-
-Small section of How-tos or guide, or general article
-
-:::
-
-::::::
+::::
+:::::

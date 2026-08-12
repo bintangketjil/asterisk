@@ -123,9 +123,16 @@ page_filters=(
     "lib/filter/element.lua"
 )
 
-declare -A main_header=(
+declare -A header_root=(
     [src]="content/partials/header.md"
     [out]="templates/partials/gen-header.html"
+    [templ]="templates/header.html"
+    [filters]="base_filters"
+)
+
+declare -A header_writings=(
+    [src]="content/partials/header-writings.md"
+    [out]="templates/partials/gen-header-writings.html"
     [templ]="templates/header.html"
     [filters]="base_filters"
 )
@@ -141,12 +148,13 @@ declare -A index_root=(
 declare -A index_writings=(
     [src]="content/pages/writings.md"
     [out]="build/writings/index.html"
-    [templ]="templates/base.html"
+    [templ]="templates/writings.html"
     [filters]="page_filters"
 )
 
 partials=(
-    main_header
+    header_root
+    header_writings
 )
 
 pages=(
@@ -192,4 +200,4 @@ build_assets
 
 generate partials
 
-generate index_root
+generate pages

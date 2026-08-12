@@ -6,17 +6,20 @@ type: root-index
 css: /assets/static/css/style.css
 ---
 
-:::::: {tag="section" .intro .container}
-::::: {.grid .half .marginb-7 .font-sans .text-xs .faint}
-:::: {.block}
-Asterisk is an archive of things that have stayed with me long enough to be worth keeping.
-::::
+:::::::: {.container .grid .split .gap-6}
 
-:::: {tag="aside" .al-right}
+::::::: {tag="aside" .font-sans .text-xs .muted}
+
+Asterisk is an archive of things that have stayed with me long enough to be worth keeping.
+
 Epoch &middot; 2026 \
-Entry &middot; @value(entry-count)
-::::
-:::::
+Entry &middot; 0010
+
+:::::::
+
+::::::: {.content}
+
+:::::: {tag="section" .intro}
 
 ![Wizard Frog greets you all.](/assets/static/images/frog0.svg){height="100"}
 
@@ -31,22 +34,22 @@ I hope you find something worth carrying with you.
 ::::::
 
 
-:::::: {tag="section" .featured .container}
+:::::: {tag="section" .featured .counter}
 ## Featured
 ::::: {tag="a" href="link" .featured-link}
-```
-@feed(src="recent" tag="featured")
-```
+
+::feed(src="recent" tag="featured")
+
 :::::
 ::::::
 
 
-:::::: {tag="section" .recent .container}
+:::::: {tag="section" .recent .counter}
 ## Recent
 ::::: {.recent-list}
-```
-@feed(src="recent" limit=5)
-```
+
+::feed(src="recent" limit=5)
+
 :::::
 
 ::::: {.block .marginy-4}
@@ -55,7 +58,7 @@ I hope you find something worth carrying with you.
 ::::::
 
 
-:::::: {tag="section" .current .container}
+:::::: {tag="section" .current .counter}
 ## Currently
 
 ### Building
@@ -66,7 +69,7 @@ A tiny publishing system.
 
 Built with Bash, Lua, Pandoc, and some other unix utilites.
 
-Updated on `@value(artifact-update)`
+Updated on ::value(artifact-update)
 
 [Source](link) [About](link)
 
@@ -76,7 +79,7 @@ An ongoing archive.
 
 Built with Markdown and [Artifact](link).
 
-Updated on `@value(asterisk-update)`
+Updated on ::@value(asterisk-update)
 
 [Source](link) [About](link)
 
@@ -84,9 +87,9 @@ Updated on `@value(asterisk-update)`
 
 Not much for now.
 
-- Dune (`@value(dune-percent)`%)
-- Programming with Lua (`@value(plua-percent)`%)
-- Bash CookBook (`@query(bcookbook-percent)`%)
+- Dune (::value(dune-percent)%)
+- Programming with Lua (::value(plua-percent)%)
+- Bash CookBook (::query(bcookbook-percent)%)
 
 See [list](link) for what it should've been.
 
@@ -97,3 +100,7 @@ Even smaller.
 - Bash
 - Math
 ::::::
+
+:::::::
+
+::::::::

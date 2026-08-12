@@ -83,13 +83,6 @@
 	text-wrap: pretty;
     }
 
-    :where(main) {
-	margin-block: var(--space-8);
-    }
-
-    :where(section) {
-	margin-block: var(--space-7);
-    }
 }
 
 @layer base {
@@ -98,6 +91,7 @@
 	--font-fallback: "Times New Roman", serif;
 	--font-editorial: "PPEditorialNew";
 	--font-sans: "IosevkaAile";
+	--font-mono: monospace;
 
 	--text-2xs: .6875rem; 	/* metadata */
 	--text-2xs--line-height: calc(.85 / .6875);
@@ -176,6 +170,14 @@
 	color: var(--ink);
 	counter-reset: section;
     }
+    
+    :where(main) {
+	margin-block: var(--space-8);
+    }
+
+    :where(section:not(:fist-child)) {
+	margin-block: var(--space-7);
+    }
 
     main a:not([class]) {
 	text-decoration: underline;
@@ -186,6 +188,27 @@
 	    color: var(--link);	    
 	}
     }
+    
+    main p {
+	margin-block: calc(var(--spacing) * 5);
+	/* width: min(100%, var(--measure-base)); */
+    }
+    main p:first-child {
+	margin-top: calc(var(--spacing) * 0);
+    }
+    main p:last-child {
+	margin-bottom: calc(var(--spacing) * 0);
+    }
+
+    main :where(h1, h2, h3):first-child {
+	margin-block-start: 0;
+	margin-block-end: var(--space-4);
+    }
+
+
+    main li + li {
+	margin-block: var(--space-2);
+    }
 
     :where(h1, h2, h3, h4):not(:has([class])) {
 	font-size: inherit;
@@ -195,12 +218,17 @@
     /* } */
 
     .container {
-	--container-width: var(--layout-md);
+	--container-width: var(--layout-base);
 	width: min(var(--page-width), var(--container-width));
 	margin-inline: auto;
     }
 
-}
+    .has-aside:has(.container > aside) .container {
+	--container-width: var(--layout-wide);
+    }
+    .has-aside:has(.container > aside) .site-nav {
+	width: min(100%, calc(var(--layout-wide) - 15%));
+    }
 
 @layer component {
     .site-header {
@@ -233,9 +261,8 @@
 	padding: .5em;
     }
 
-
     .site-logo {
-	font-family: var(--font-editorial);
+	/* font-family: var(--font-editorial); */
 	font-size: var(--text-base);
 	letter-spacing: -.05em;
 	margin-inline: auto;
@@ -264,23 +291,17 @@
 	}
     }
 
-    
+    aside {
+	/* font-family: var(--font-sans); */
+	/* font-size: var(--text-xs); */
+	/* padding-block: var(--space-4); */
+	/* padding-inline-start: var(--space-6); */
+    }
 }
 
 @layer utilities {
-    main p {
-	margin-block: calc(var(--spacing) * 5);
-	width: min(100%, var(--measure-base));
-    }
-    main p:first-child {
-	margin-top: calc(var(--spacing) * 0);
-    }
-    main p:last-child {
-	margin-bottom: calc(var(--spacing) * 0);
-    }
-
-    main section > :where(h1, h2, h3):first-child {
-	margin-block-end: var(--space-4);
+    .page-base {
+	--container-width: var(--layout-base);
     }
 
     .font-default {
@@ -293,6 +314,14 @@
 
     .font-sans {
 	font-family: var(--font-sans);
+	font-size: .925rem;
+	letter-spacing: -.02rem;
+    }
+
+    .font-mono {
+	font-family: monospace;
+	font-size: .925rem;
+	letter-spacing: -.02rem;
     }
 
     .italic {
@@ -319,6 +348,9 @@
     .al-left {
 	text-align: left;
     }
+    .al-baseline {
+	align-items: baseline;
+    }
 
     .faint {
 	color: var(--faint);
@@ -326,6 +358,10 @@
 
     .muted {
 	color: var(--muted);
+    }
+
+    .borderl {
+	border-left: 1px solid var(--border);
     }
 
     .marginb-7 {
@@ -357,8 +393,18 @@
 	margin-block: var(--space-7);
     }
 
+    .li-marginy-3 li + li {
+	margin-block: var(--space-3);
+    }
+    .li-marginy-4 li + li{
+	margin-block: var(--space-4);
+    }
+
     .gap-4 {
-	gap: var(--space-4);
+	gap: calc(var(--spacing) * 4);
+    }
+    .gap-6 {
+	gap: calc(var(--spacing) * 6);
     }
 
     .flex {
@@ -368,9 +414,24 @@
     .between {
 	justify-content: space-between;
     }
-
+    
     .grid {
 	display: grid;
+    }
+
+    .split {
+	grid-template-columns: 1fr 1fr;
+    }
+    .split:has(aside){
+	grid-template-columns: 1fr 30%;
+    }
+    .split aside {
+	grid-column: 2;
+	grid-row: 1;
+    }
+    .split .content {
+	grid-column: 1;
+	grid-row: 1;
     }
 
     .half {
@@ -386,6 +447,11 @@
 	}
     }
 
+    .meta {
+	font-family: var(--font-sans);
+	font-size: var(--text-xs);
+    }
+    
     .decoration {
 	text-decoration: underline;
 	text-decoration-style: dashed;
@@ -411,6 +477,45 @@
 	& .meta .decoration {
 	    text-decoration: none;
 	}
+    }
+
+    .list-nostyle ul,
+    .list-nostyle ol {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+    }
+
+}
+
+@layer utilities {
+    main section.counter {
+	margin-block: var(--space-9);
+	position: relative;
+	&::before {
+	    counter-increment: section;
+	    content: "§00" counter(section);
+	    font-variant-numeric: proportional-nums;
+	    font-family: var(--font-sans);
+	    letter-spacing: -.02rem;
+	    position: absolute;
+	    top: calc(-1 * var(--space-6));
+	    left: 0;
+	    color: var(--faint);
+	}
+	&:not(:last-child)::after {
+	    content: "";
+	    display: block;
+	    height: 1px;
+	    width: 100%;
+	    background: var(--border1);
+	    position: absolute;
+	    bottom: calc(-1 * var(--space-7));
+	}
+    }
+    main section.counter h2 {
+	font-size: 0.9rem;
+	letter-spacing: .05em;
     }
 
 }
