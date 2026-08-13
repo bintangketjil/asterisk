@@ -5,7 +5,7 @@
 @font-face {
     font-family: 'IosevkaAile';
     src:
-        url('/assets/static/fonts/IosevkaAile-ThinItalic.woff2') format('woff2');
+        url('/static/fonts/IosevkaAile-ThinItalic.woff2') format('woff2');
     font-weight: 100;
     font-style: italic;
     font-display: swap;
@@ -14,7 +14,7 @@
 @font-face {
     font-family: 'IosevkaAile';
     src:
-        url('/assets/static/fonts/IosevkaAile-Thin.woff2') format('woff2');
+        url('/static/fonts/IosevkaAile-Thin.woff2') format('woff2');
     font-weight: 100;
     font-style: normal;
     font-display: swap;
@@ -23,7 +23,7 @@
 @font-face {
     font-family: 'IosevkaAile';
     src:
-        url('/assets/static/fonts/IosevkaAile-ExtraLightItalic.woff2') format('woff2');
+        url('/static/fonts/IosevkaAile-ExtraLightItalic.woff2') format('woff2');
     font-weight: 200;
     font-style: italic;
     font-display: swap;
@@ -32,7 +32,7 @@
 @font-face {
     font-family: 'IosevkaAile';
     src:
-        url('/assets/static/fonts/IosevkaAile-ExtraLight.woff2') format('woff2');
+        url('/static/fonts/IosevkaAile-ExtraLight.woff2') format('woff2');
     font-weight: 200;
     font-style: normal;
     font-display: swap;
@@ -41,7 +41,7 @@
 @font-face {
     font-family: 'IosevkaAile';
     src:
-        url('/assets/static/fonts/IosevkaAile-LightItalic.woff2') format('woff2');
+        url('/static/fonts/IosevkaAile-LightItalic.woff2') format('woff2');
     font-weight: 300;
     font-style: italic;
     font-display: swap;
@@ -50,7 +50,7 @@
 @font-face {
     font-family: 'IosevkaAile';
     src:
-        url('/assets/static/fonts/IosevkaAile-Light.woff2') format('woff2');
+        url('/static/fonts/IosevkaAile-Light.woff2') format('woff2');
     font-weight: 300;
     font-style: normal;
     font-display: swap;
@@ -59,7 +59,7 @@
 @font-face {
     font-family: 'IosevkaAile';
     src:
-        url('/assets/static/fonts/IosevkaAile-Italic.woff2') format('woff2');
+        url('/static/fonts/IosevkaAile-Italic.woff2') format('woff2');
     font-weight: 400;
     font-style: italic;
     font-display: swap;
@@ -68,7 +68,7 @@
 @font-face {
     font-family: 'IosevkaAile';
     src:
-        url('/assets/static/fonts/IosevkaAile-Regular.woff2') format('woff2');
+        url('/static/fonts/IosevkaAile-Regular.woff2') format('woff2');
     font-weight: 400;
     font-style: normal;
     font-display: swap;
@@ -77,7 +77,7 @@
 @font-face {
     font-family: 'IosevkaAile';
     src:
-        url('/assets/static/fonts/IosevkaAile-MediumItalic.woff2') format('woff2');
+        url('/static/fonts/IosevkaAile-MediumItalic.woff2') format('woff2');
     font-weight: 500;
     font-style: italic;
     font-display: swap;
@@ -86,7 +86,7 @@
 @font-face {
     font-family: 'IosevkaAile';
     src:
-        url('/assets/static/fonts/IosevkaAile-Medium.woff2') format('woff2');
+        url('/static/fonts/IosevkaAile-Medium.woff2') format('woff2');
     font-weight: 500;
     font-style: normal;
     font-display: swap;
@@ -95,7 +95,7 @@
 @font-face {
     font-family: 'IosevkaAile';
     src:
-        url('/assets/static/fonts/IosevkaAile-SemiBoldItalic.woff2') format('woff2');
+        url('/static/fonts/IosevkaAile-SemiBoldItalic.woff2') format('woff2');
     font-weight: 600;
     font-style: italic;
     font-display: swap;
@@ -104,7 +104,7 @@
 @font-face {
     font-family: 'IosevkaAile';
     src:
-        url('/assets/static/fonts/IosevkaAile-SemiBold.woff2') format('woff2');
+        url('/static/fonts/IosevkaAile-SemiBold.woff2') format('woff2');
     font-weight: 600;
     font-style: normal;
     font-display: swap;
@@ -113,7 +113,7 @@
 @font-face {
     font-family: 'IosevkaAile';
     src:
-        url('/assets/static/fonts/IosevkaAile-BoldItalic.woff2') format('woff2');
+        url('/static/fonts/IosevkaAile-BoldItalic.woff2') format('woff2');
     font-weight: 700;
     font-style: italic;
     font-display: swap;
@@ -122,7 +122,7 @@
 @font-face {
     font-family: 'IosevkaAile';
     src:
-        url('/assets/static/fonts/IosevkaAile-Bold.woff2') format('woff2');
+        url('/static/fonts/IosevkaAile-Bold.woff2') format('woff2');
     font-weight: 700;
     font-style: normal;
     font-display: swap;
@@ -131,7 +131,7 @@
 @font-face {
     font-family: 'IosevkaAile';
     src:
-        url('/assets/static/fonts/IosevkaAile-ExtraBoldItalic.woff2') format('woff2');
+        url('/static/fonts/IosevkaAile-ExtraBoldItalic.woff2') format('woff2');
     font-weight: 800;
     font-style: italic;
     font-display: swap;
@@ -140,7 +140,7 @@
 @font-face {
     font-family: 'IosevkaAile';
     src:
-        url('/assets/static/fonts/IosevkaAile-ExtraBold.woff2') format('woff2');
+        url('/static/fonts/IosevkaAile-ExtraBold.woff2') format('woff2');
     font-weight: 800;
     font-style: normal;
     font-display: swap;
@@ -149,7 +149,7 @@
 @font-face {
     font-family: 'IosevkaAile';
     src:
-        url('/assets/static/fonts/IosevkaAile-HeavyItalic.woff2') format('woff2');
+        url('/static/fonts/IosevkaAile-HeavyItalic.woff2') format('woff2');
     font-weight: 900;
     font-style: italic;
     font-display: swap;
@@ -158,16 +158,97 @@
 @font-face {
     font-family: 'IosevkaAile';
     src:
-        url('/assets/static/fonts/IosevkaAile-Heavy.woff2') format('woff2');
+        url('/static/fonts/IosevkaAile-Heavy.woff2') format('woff2');
     font-weight: 900;
     font-style: normal;
     font-display: swap;
 }
 
 @font-face {
+    font-family: 'PFCentroSerifPro';
+    src:
+        url('/static/fonts/PFCentroSerifPro-Italic.woff2') format('woff2');
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'PFCentroSerifPro';
+    src:
+        url('/static/fonts/PFCentroSerifPro-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'PFCentroSerifPro';
+    src:
+        url('/static/fonts/PFCentroSerifPro-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'PFCentroSerifPro';
+    src:
+        url('/static/fonts/PFCentroSerifPro-Black.woff2') format('woff2');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'PFOccula';
+    src:
+        url('/static/fonts/PFOccula-Italic.woff2') format('woff2');
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'PFOccula';
+    src:
+        url('/static/fonts/PFOccula-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'PFOccula';
+    src:
+        url('/static/fonts/PFOccula-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'PFRafSkript';
+    src:
+        url('/static/fonts/PFRafSkript-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'PFRafSkript';
+    src:
+        url('/static/fonts/PFRafSkript-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
     font-family: 'PPEditorialNew';
     src:
-        url('/assets/static/fonts/PPEditorialNew-UltralightItalic.woff2') format('woff2');
+        url('/static/fonts/PPEditorialNew-UltralightItalic.woff2') format('woff2');
     font-weight: 200;
     font-style: italic;
     font-display: swap;
@@ -176,7 +257,7 @@
 @font-face {
     font-family: 'PPEditorialNew';
     src:
-        url('/assets/static/fonts/PPEditorialNew-Ultralight.woff2') format('woff2');
+        url('/static/fonts/PPEditorialNew-Ultralight.woff2') format('woff2');
     font-weight: 200;
     font-style: normal;
     font-display: swap;
@@ -185,7 +266,7 @@
 @font-face {
     font-family: 'PPEditorialNew';
     src:
-        url('/assets/static/fonts/PPEditorialNew-Italic.woff2') format('woff2');
+        url('/static/fonts/PPEditorialNew-Italic.woff2') format('woff2');
     font-weight: 400;
     font-style: italic;
     font-display: swap;
@@ -194,7 +275,7 @@
 @font-face {
     font-family: 'PPEditorialNew';
     src:
-        url('/assets/static/fonts/PPEditorialNew-Regular.woff2') format('woff2');
+        url('/static/fonts/PPEditorialNew-Regular.woff2') format('woff2');
     font-weight: 400;
     font-style: normal;
     font-display: swap;
@@ -203,7 +284,7 @@
 @font-face {
     font-family: 'PPEditorialNew';
     src:
-        url('/assets/static/fonts/PPEditorialNew-UltraboldItalic.woff2') format('woff2');
+        url('/static/fonts/PPEditorialNew-UltraboldItalic.woff2') format('woff2');
     font-weight: 800;
     font-style: italic;
     font-display: swap;
@@ -212,7 +293,7 @@
 @font-face {
     font-family: 'PPEditorialNew';
     src:
-        url('/assets/static/fonts/PPEditorialNew-Ultrabold.woff2') format('woff2');
+        url('/static/fonts/PPEditorialNew-Ultrabold.woff2') format('woff2');
     font-weight: 800;
     font-style: normal;
     font-display: swap;
@@ -221,7 +302,7 @@
 @font-face {
     font-family: 'PPNeueMontrealMono';
     src:
-        url('/assets/static/fonts/PPNeueMontrealMono-Thin.woff2') format('woff2');
+        url('/static/fonts/PPNeueMontrealMono-Thin.woff2') format('woff2');
     font-weight: 100;
     font-style: normal;
     font-display: swap;
@@ -230,7 +311,7 @@
 @font-face {
     font-family: 'PPNeueMontrealMono';
     src:
-        url('/assets/static/fonts/PPNeueMontrealMono-Book.woff2') format('woff2');
+        url('/static/fonts/PPNeueMontrealMono-Book.woff2') format('woff2');
     font-weight: 350;
     font-style: normal;
     font-display: swap;
@@ -239,7 +320,7 @@
 @font-face {
     font-family: 'PPNeueMontrealMono';
     src:
-        url('/assets/static/fonts/PPNeueMontrealMono-RegularItalic.woff2') format('woff2');
+        url('/static/fonts/PPNeueMontrealMono-RegularItalic.woff2') format('woff2');
     font-weight: 400;
     font-style: italic;
     font-display: swap;
@@ -248,7 +329,7 @@
 @font-face {
     font-family: 'PPNeueMontrealMono';
     src:
-        url('/assets/static/fonts/PPNeueMontrealMono-Medium.woff2') format('woff2');
+        url('/static/fonts/PPNeueMontrealMono-Medium.woff2') format('woff2');
     font-weight: 500;
     font-style: normal;
     font-display: swap;
@@ -257,8 +338,8 @@
 @font-face {
     font-family: 'PPNeueMontrealMono';
     src:
-        url('/assets/static/fonts/PPNeueMontrealMono-BoldItalic.woff2') format('woff2'),
-        url('/assets/static/fonts/PPNeueMontrealMono-BoldItalic.woff') format('woff');
+        url('/static/fonts/PPNeueMontrealMono-BoldItalic.woff2') format('woff2'),
+        url('/static/fonts/PPNeueMontrealMono-BoldItalic.woff') format('woff');
     font-weight: 700;
     font-style: italic;
     font-display: swap;
@@ -267,7 +348,7 @@
 @font-face {
     font-family: 'PPNeueMontrealMono';
     src:
-        url('/assets/static/fonts/PPNeueMontrealMono-Bold.woff2') format('woff2');
+        url('/static/fonts/PPNeueMontrealMono-Bold.woff2') format('woff2');
     font-weight: 700;
     font-style: normal;
     font-display: swap;
@@ -276,7 +357,7 @@
 @font-face {
     font-family: 'STIXTwoMath';
     src:
-        url('/assets/static/fonts/STIXTwoMath-Regular.woff2') format('woff2');
+        url('/static/fonts/STIXTwoMath-Regular.woff2') format('woff2');
     font-weight: 400;
     font-style: normal;
     font-display: swap;
@@ -285,7 +366,7 @@
 @font-face {
     font-family: 'STIXTwoText';
     src:
-        url('/assets/static/fonts/STIXTwoText-Italic.woff2') format('woff2');
+        url('/static/fonts/STIXTwoText-Italic.woff2') format('woff2');
     font-weight: 400;
     font-style: italic;
     font-display: swap;
@@ -294,7 +375,7 @@
 @font-face {
     font-family: 'STIXTwoText';
     src:
-        url('/assets/static/fonts/STIXTwoText-Regular.woff2') format('woff2');
+        url('/static/fonts/STIXTwoText-Regular.woff2') format('woff2');
     font-weight: 400;
     font-style: normal;
     font-display: swap;
@@ -303,7 +384,7 @@
 @font-face {
     font-family: 'STIXTwoText';
     src:
-        url('/assets/static/fonts/STIXTwoText-MediumItalic.woff2') format('woff2');
+        url('/static/fonts/STIXTwoText-MediumItalic.woff2') format('woff2');
     font-weight: 500;
     font-style: italic;
     font-display: swap;
@@ -312,7 +393,7 @@
 @font-face {
     font-family: 'STIXTwoText';
     src:
-        url('/assets/static/fonts/STIXTwoText-Medium.woff2') format('woff2');
+        url('/static/fonts/STIXTwoText-Medium.woff2') format('woff2');
     font-weight: 500;
     font-style: normal;
     font-display: swap;
@@ -321,7 +402,7 @@
 @font-face {
     font-family: 'STIXTwoText';
     src:
-        url('/assets/static/fonts/STIXTwoText-SemiBoldItalic.woff2') format('woff2');
+        url('/static/fonts/STIXTwoText-SemiBoldItalic.woff2') format('woff2');
     font-weight: 600;
     font-style: italic;
     font-display: swap;
@@ -330,7 +411,7 @@
 @font-face {
     font-family: 'STIXTwoText';
     src:
-        url('/assets/static/fonts/STIXTwoText-SemiBold.woff2') format('woff2');
+        url('/static/fonts/STIXTwoText-SemiBold.woff2') format('woff2');
     font-weight: 600;
     font-style: normal;
     font-display: swap;
@@ -339,7 +420,7 @@
 @font-face {
     font-family: 'STIXTwoText';
     src:
-        url('/assets/static/fonts/STIXTwoText-BoldItalic.woff2') format('woff2');
+        url('/static/fonts/STIXTwoText-BoldItalic.woff2') format('woff2');
     font-weight: 700;
     font-style: italic;
     font-display: swap;
@@ -348,7 +429,7 @@
 @font-face {
     font-family: 'STIXTwoText';
     src:
-        url('/assets/static/fonts/STIXTwoText-Bold.woff2') format('woff2');
+        url('/static/fonts/STIXTwoText-Bold.woff2') format('woff2');
     font-weight: 700;
     font-style: normal;
     font-display: swap;

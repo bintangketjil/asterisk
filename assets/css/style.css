@@ -1,4 +1,4 @@
-@import "/assets/static/css/fonts.css";
+@import "/static/css/fonts.css";
 
 @layer reset, base, component, utilities;
 
@@ -87,7 +87,7 @@
 
 @layer base {
     :root {
-	--font-default: "STIXTwoText";
+	--font-default: "PFCentroSerifPro";
 	--font-fallback: "Times New Roman", serif;
 	--font-editorial: "PPEditorialNew";
 	--font-sans: "IosevkaAile";

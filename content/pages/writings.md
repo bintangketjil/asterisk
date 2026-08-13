@@ -3,7 +3,7 @@ title: Writings
 category: page
 type: writings
 date: 2026-07-31
-css: /assets/static/css/style.css
+css: /static/css/style.css
 ---
 
 ::::: {.container}

@@ -3,7 +3,7 @@ title: Asterisk
 date: 2026-07-27
 category: page
 type: root-index
-css: /assets/static/css/style.css
+css: /static/css/style.css
 ---
 
 :::::::: {.container .grid .split .gap-6}
@@ -21,7 +21,7 @@ Entry &middot; 0010
 
 :::::: {tag="section" .intro}
 
-![Wizard Frog greets you all.](/assets/static/images/frog0.svg){height="100"}
+![Wizard Frog greets you all.](/static/images/frog0.svg){height="100"}
 
 This is where I supposedly live my digital life.
 

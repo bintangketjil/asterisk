@@ -1,5 +1,7 @@
 #!/bin/env bash
 
+# set -xe
+
 declare -A groups
 
 parse_variant() {
@@ -87,29 +89,26 @@ log() {
     fi
 }
 
-TARGET=""
-OUTPUT="assets/static/css/fonts.css"
-
+TARGET="$1"
+OUTPUT="$2"
 VERBOSE=0
 DRY_RUN=0
 
+# while [[ $# -gt 0 ]]; do
+#     case "$1" in
+# 	--verbose|-v)
+# 	    VERBOSE=1
+# 	    ;;
+# 	--dry-run|-n)
+# 	    DRY_RUN=1
+# 	    ;;
+# 	*)
+# 	    TARGET="$1"
+# 	    ;;
+#     esac
 
-while [[ $# -gt 0 ]]; do
-    case "$1" in
-	--verbose|-v)
-	    VERBOSE=1
-	    ;;
-	--dry-run|-n)
-	    DRY_RUN=1
-	    ;;
-	*)
-	    TARGET="$1"
-	    ;;
-    esac
-
-    shift
-done
-
+#     shift
+# done
 
 if (( DRY_RUN )); then
     exec 3>&1
@@ -184,7 +183,7 @@ for filename in "$TARGET"/*.{ttf,otf,woff,woff2}; do
     log "    stretch: $stretch"
 
     key="${family}|${weight}|${style}|${stretch}"
-    src="url('/$TARGET/$filename') format('$css_format')"
+    src="url('/static/fonts/$filename') format('$css_format')"
 
     record="${priority}|${style_priority}|${src}|${filename}"
     groups["$key"]+="$record"$'\n'

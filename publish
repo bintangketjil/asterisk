@@ -222,8 +222,8 @@ page_filters=(
 )
 
 declare -A assets=(
-    [src]="assets"
-    [out]="build/static"
+    [src]="assets/"
+    [out]="build/static/"
 )
 
 declare -A header_root=(
