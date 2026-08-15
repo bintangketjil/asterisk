@@ -17,13 +17,50 @@ local allowed = {
    div = true,
    p = true,
    span = true,
+   ul = true,
+   ol = true,
 }
+
+local function render_unwrapped(block)
+   return pandoc.write(
+      pandoc.Pandoc({
+	    pandoc.Plain(block.content)
+      }),
+      "html"
+   )
+end
+
+local unwrap_map = {
+   p = "Para",
+}
+
+-- remove pandoc wrappers
+-- p > a becomes a
+local function get_unwrap(block)
+   local unwrap = {}
+
+   local value = block.attributes.unwrap
+
+   if not value then
+      return unwrap
+   end
+
+   for tag in value:gmatch("%S+") do
+      local node = unwrap_map[tag]
+
+      if node then
+	 unwrap[node] = true
+      end
+   end
+
+   return unwrap
+end
 
 function element.attributes(block)
    local attrs = {}
 
    for key, value in pairs(block.attributes) do
-      if key ~= "tag" then
+      if key ~= "tag" and key ~= "unwrap" then
 	 attrs[key] = value
       end
    end
@@ -51,11 +88,25 @@ function element.render(block, walk)
    end
 
    local content = walk.blocks(block.content)
+   local unwrap = get_unwrap(block)
+   local parts = {}
 
-   local inner = pandoc.write(
-      pandoc.Pandoc(content),
-      "html"
-   )
+   for _, child in ipairs(content) do
+      if unwrap[child.t] then
+	 local rendered = render_unwrapped(child)
+
+	 if rendered then
+	    table.insert(parts, rendered)
+	 end
+      else
+	 table.insert(parts, pandoc.write(
+			 pandoc.Pandoc({ child }),
+			 "html"
+	 ))
+      end
+   end
+
+   local inner = table.concat(parts, "\n")
 
    return pandoc.RawBlock(
       "html",

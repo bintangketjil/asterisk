@@ -2,6 +2,7 @@ local targets = {
    "Image",
    "Link",
    "LineBreak",
+   "Span",
 }
 
 function Para(element)

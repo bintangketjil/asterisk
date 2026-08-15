@@ -44,6 +44,15 @@ build() {
 }
 
 
+dummy_page() {
+    echo "[create] dummy"
+    pandoc -s test/typeface.md \
+	   -o build/test.html\
+	   --template="templates/test.html" \
+	   --lua-filter="lib/filter/unwrapper.lua" \
+	   --lua-filter="lib/filter/element.lua"
+}
+
 tree() {
     local node="$1"
 
@@ -303,4 +312,6 @@ fi
 
 build assets
 
-generate all
+# generate all
+
+dummy_page

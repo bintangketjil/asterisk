@@ -1,7 +1,37 @@
 ---
 title: Test
-<!-- css: /static/css/style.css -->
+css: /static/css/test.css
 ---
+
+<!-- header -->
+::: {tag="header" .site-header}
+::: {.header-inner .container .mx-auto .flex .between .center .style-ui}
+
+::: {tag="nav" unwrap="p" .site-nav .flex .center}
+[Latest](link)
+[/]{.sep}
+[Archive](link)
+[/]{.sep}
+[Writings](link)
+[/]{.sep}
+[Library](link)
+[/]{.sep}
+[Projects](link)
+[/]{.sep}
+[Self](link)
+:::
+
+::: {.site-logo}
+[Asterisk](link)
+:::
+
+:::
+:::
+
+
+<!-- main -->
+::: {tag="main"}
+::: {.container .mx-auto}
 
 # Markdown: Syntax
 
@@ -29,7 +59,11 @@ title: Test
 **Note:** This document is itself written using Markdown; you
 can [see the source for it by adding '.text' to the URL](/projects/markdown/syntax.text).
 
-----
+\
+
+![Strom is Coming](/static/images/bg1.jpg)
+
+\
 
 ## Overview
 
@@ -313,3 +347,6 @@ Unlike a pre-formatted code block, a code span indicates code within a
 normal paragraph. For example:
 
 Use the `printf()` function.
+
+:::
+:::
