@@ -1,3 +1,4 @@
 build
 templates/partials
 test/*
+assets/css/fonts.css

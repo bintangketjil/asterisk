@@ -226,7 +226,6 @@ base_filters=(
 )
 
 page_filters=(
-    "lib/filter/unwrapper.lua"
     "lib/filter/element.lua"
 )
 
@@ -239,14 +238,14 @@ declare -A header_root=(
     [src]="content/partials/header.md"
     [out]="templates/partials/gen-header.html"
     [templ]="templates/header.html"
-    [filters]="base_filters"
+    [filters]="page_filters"
 )
 
 declare -A header_writings=(
     [src]="content/partials/header-writings.md"
     [out]="templates/partials/gen-header-writings.html"
     [templ]="templates/header.html"
-    [filters]="base_filters"
+    [filters]="page_filters"
 )
 
 declare -A index_root=(
@@ -311,7 +310,5 @@ else
 fi
 
 build assets
+generate all
 
-# generate all
-
-dummy_page
