@@ -1,5 +1,6 @@
 #!/bin/env bash
 
+set -uo pipefail
 
 VERBOSE=0
 DRY_RUN=0
@@ -54,7 +55,7 @@ find_fonts() {
 	"$root"
 	-type f
 	-regextype posix-extended
-	-iregex '.*\.(woff2|woff|otf"ttf")$'
+	-iregex '.*\.(woff2|woff|otf|ttf)$'
 	-print0
     )
 
@@ -71,53 +72,61 @@ find_fonts() {
 parse_font() {
     local font="$1"
 
-    echo "$font"
-}
-
-parse_variant() {
-    local variant="$1"
+    filename=$(basename -- "$font")
+    name="${filename%.*}"
+    family="${name%-*}"
+    variant="${name##*-}"
+    format="${filename##*.}"
 
     weight=400
     style=normal
     stretch=normal
     variable=false
+    
 
+    if [[ "$family" == "$name" ]]; then
+	family="$name"
+	variant="Regular"
+    fi
+	
+
+     # style
     case "$variant" in
 	*Italic)
 	    style=italic
-	    variant=${variant%Italic}
+	    variant="${variant%Italic}"
 	    ;;
 	*Oblique)
 	    style=oblique
-	    variant=${variant%Oblique}
-	    ;;
-	*Text)
-	    style=text
-	    variant=${variant%Text}
-    esac
-
-    case "$variant" in
-	*Variable*|*\[wght\]*)
-	    variable=true
-	    variant=$(echo "$variant" | sed 's/\[[^]]*\]//g')
+	    variant="${variant%Oblique}"
 	    ;;
     esac
 
+    # stretch
     case "$variant" in
-	*Condensed)
-	    stretch=condensed
-	    variant=${variant%Condensed}
-	    ;;
 	*SemiCondensed)
 	    stretch=semi-condensed
-	    variant=${variant%SemiCondensed}
+	    variant="${variant%SemiCondensed}"
+	    ;;
+	*Condensed)
+	    stretch=condensed
+	    variant="${variant%Condensed}"
 	    ;;
 	*Expanded)
 	    stretch=expanded
-	    variant=${variant%Expanded}
+	    variant="${variant%Expanded}"
 	    ;;
     esac
 
+    # variable
+    case "$variant" in
+	*Variable*|*\[wght\]*)
+	    variable=true
+	    variant=$(printf '%s' "$variant" | sed 's/\[[^]]*\]//g')
+	    ;;
+    esac
+
+    # weight
     case "${variant,,}" in
 	""|regular)
 	    weight=400
@@ -150,18 +159,86 @@ parse_variant() {
 	    weight=800
 	    ;;
 	black|heavy)
-	    weight=900
+	    weight=800
 	    ;;
     esac
 
-    if $variable; then
-	weight="100 900"
-    fi
+    info "Looking at $filename"
+    info "- Name: $name"
+    info "- Family: $family"
+    info "- Style: $style"
+    info "- Stretch: $stretch"
+    info "- Weight: $weight"
+    info "- Format: $format"
+}
+
+group_font() {
+    local font="$1"
+
+    format_priority=0
+    render_priority=0
+    style_priority=0
+
+    case "${format,,}" in
+	woff2)
+	    format_priority=1
+	    css_format="woff2"
+	    ;;
+	woff)
+	    format_priority=2
+	    css_format="woff"
+	    ;;
+	ttf)
+	    format_priority=3
+	    css_format="truetype"
+	    ;;
+	otf)
+	    format_priority=4
+	    css_format="opentype"
+	    ;;
+    esac
+    
+
+    case "$variant" in
+	*Regular)
+	    render_priority=1
+	    ;;
+	""|*Italic)
+	    render_priority=2
+	    ;;
+	*)
+	    render_priority=3
+	    ;;
+    esac
+
+    case "$style" in
+	normal)
+	    style_priority=1
+	    ;;
+	italic)
+	    style_priority=2
+    esac
+    
+    css_path="/static/fonts"
+
+    font_key="${format_priority}|${style_priority}|${render_priority}|${family}|${weight}|${style}|$stretch"
+    font_src="url('$css_path/$filename') format('$css_format')"
+    font_face="${font_src}|${filename}"
+
+
+
+    groups["$font_key"]+="$font_face"$'\n'
+    
+    info "Format priority: ${format_priority} Style priority: ${style_priority} Render priority: ${render_priority}"
+    info "font key: $font_key"
+    info "font face: $font_face"
+
+    ((font_count++))
 }
 
 info() {
     if (( VERBOSE )); then
-	echo "$1" >&2
+	echo "${@:-}" >&2
     fi
 }
 
@@ -185,8 +262,6 @@ if [[ ! -e "$TARGET" ]]; then
 	exit 1
 fi
 
-declare -A groups
-
 font_count=0
 family_count=0
 
@@ -199,9 +274,35 @@ fonts_dir="$TARGET"
 if ! find_fonts "$fonts_dir"; then
     echo "could not find any fonts in this directory"
 else
+    declare -A groups
+    
     for font in "${fonts[@]}"; do
+	info
+	info "PARSE FONT"
 	parse_font "$font"
+
+	info
+	info "GROUP FONT"
+	group_font "$font"
     done
+    
+    echo
+    echo "EMIT FONTS"
+
+    # count
+    # read_families=$(printf '%s\n' "${!groups[@]}" | cut -d'|' -f4 | sort -u)
+    
+    # while IFS= read -r family; do
+    # 	echo "$family"
+    # done <<< "$read_families"
+
+    keys=$(printf "%s\n" "${groups[@]}" | sort -u)
+
+    for key in "$keys"; do
+	echo "$key"
+    done
+
+
 fi
 
 # for filename in "$TARGET"/*.{woff,woff2}; do
