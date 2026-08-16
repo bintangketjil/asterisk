@@ -90,7 +90,7 @@ parse_font() {
     fi
 	
 
-     # style
+    # style
     case "$variant" in
 	*Italic)
 	    style=italic
@@ -200,7 +200,7 @@ group_font() {
     
 
     case "$variant" in
-	*Regular)
+	*Regular|*Roman)
 	    render_priority=1
 	    ;;
 	""|*Italic)
@@ -217,23 +217,73 @@ group_font() {
 	    ;;
 	italic)
 	    style_priority=2
+	    ;;
+	oblique)
+	    style_priority=3
+	    ;;
     esac
     
     css_path="/static/fonts"
-
-    font_key="${format_priority}|${style_priority}|${render_priority}|${family}|${weight}|${style}|$stretch"
+    font_key="$family|$style_priority|$weight|$style|$stretch"
     font_src="url('$css_path/$filename') format('$css_format')"
-    font_face="${font_src}|${filename}"
+    source="$format_priority|$render_priority|$font_src|$filename"
 
+    groups["$font_key"]+="$source"$'\n'
 
-
-    groups["$font_key"]+="$font_face"$'\n'
-    
     info "Format priority: ${format_priority} Style priority: ${style_priority} Render priority: ${render_priority}"
     info "font key: $font_key"
-    info "font face: $font_face"
+    info "font face: $source"
 
     ((font_count++))
+}
+
+emit_fonts() {
+    mapfile -t keys < <(
+	printf '%s\n' "${!groups[@]}" |
+	    sort -t'|' -k1,1 -k2,2n -k3,3n -k4,4
+    )
+
+    for key in "${keys[@]}"; do
+	local family weight style stretch
+
+        IFS='|' read -r family style_priority weight style stretch <<< "$key"
+
+        {
+            echo "@font-face {"
+            echo "    font-family: '$family';"
+            echo "    font-style: $style;"
+            echo "    font-weight: $weight;"
+            echo "    font-stretch: $stretch;"
+            echo "    font-display: swap;"
+            echo "    src:"
+
+            mapfile -t sources < <(
+                printf '%s' "${groups[$key]}" |
+                    sort -t'|' -k1,1n -k2,2n -k3,3n
+            )
+
+            for ((i = 0; i < ${#sources[@]}; i++)); do
+                local format_priority style_priority render_priority
+                local src filename
+
+                IFS='|' read -r \
+                   format_priority \
+                   render_priority \
+                   src \
+                   filename <<< "${sources[$i]}"
+
+                if (( i == ${#sources[@]} - 1 )); then
+                    echo "        $src;"
+                else
+                    echo "        $src,"
+                fi
+            done
+
+            echo "}"
+            echo
+        } >&3
+    done
+
 }
 
 info() {
@@ -250,6 +300,7 @@ log_err() {
 }
 
 
+# begin
 if (( DRY_RUN )); then
     exec 3>&1
 else
@@ -262,6 +313,7 @@ if [[ ! -e "$TARGET" ]]; then
 	exit 1
 fi
 
+declare -A groups
 font_count=0
 family_count=0
 
@@ -274,8 +326,6 @@ fonts_dir="$TARGET"
 if ! find_fonts "$fonts_dir"; then
     echo "could not find any fonts in this directory"
 else
-    declare -A groups
-    
     for font in "${fonts[@]}"; do
 	info
 	info "PARSE FONT"
@@ -286,180 +336,8 @@ else
 	group_font "$font"
     done
     
-    echo
-    echo "EMIT FONTS"
+    info
+    info "EMIT FONTS"
 
-    # count
-    # read_families=$(printf '%s\n' "${!groups[@]}" | cut -d'|' -f4 | sort -u)
-    
-    # while IFS= read -r family; do
-    # 	echo "$family"
-    # done <<< "$read_families"
-
-    keys=$(printf "%s\n" "${groups[@]}" | sort -u)
-
-    for key in "$keys"; do
-	echo "$key"
-    done
-
-
+    emit_fonts
 fi
-
-# for filename in "$TARGET"/*.{woff,woff2}; do
-#     [ -e "$filename" ] || continue
-
-#     path="$filename"
-#     filename=$(basename -- "$path")
-    
-#     base="${filename%.*}"
-#     variant="${base##*-}"
-#     family="${base%-*}"
-#     format="${filename##*.}"
-
-#     if [[ "$family" == "$base" ]]; then
-# 	family="$base"
-# 	variant="Regular"
-#     fi
-
-#     style_source="$variant"
-
-    
-#     parse_variant "$variant"
-
-
-#     case "${format,,}" in
-# 	woff2)
-# 	    priority=1
-# 	    css_format="woff2"
-# 	    ;;
-# 	woff)
-# 	    priority=2
-# 	    css_format="woff"
-# 	    ;;
-# 	ttf)
-# 	    priority=3
-# 	    css_format="truetype"
-# 	    ;;
-# 	otf)
-# 	    priority=4
-# 	    css_format="opentype"
-# 	    ;;
-#     esac
-
-
-#     render_priority=0
-#     style_priority=0
-
-#     case "$style_source" in
-# 	*Regular|*Text|*Book|*Roman)
-# 	    render_priority=1
-# 	    style_priority=1
-# 	    ;;
-# 	*Italic)
-# 	    render_priority=2
-# 	    style_priority=2
-# 	    ;;
-# 	*)
-# 	    render_priority=3;
-# 	    style_priority=3
-# 	    ;;
-#     esac
-
-      
-#     key="${render_priority}|${family}|${weight}|${style}|${stretch}"
-
-#     src="url('/static/fonts/$filename') format('$css_format')"
-#     record="${priority}|${style_priority}|${src}|${filename}"
-
-#     groups["$key"]+="$record"$'\n'
-
-#     ((font_count++))
-
-#     log "| + FONT"
-#     log "| | - file: ($filename)"
-#     log "| | - family: ($family)"
-#     log "| | - style: ($style) weight: ($weight) stretch: ($stretch) variable: ($variable)"
-#     log "| | - css_format: ($css_format) format_priority: ($priority)"
-#     log "| | - style_source: ($style_source)"
-#     log "| | - render_priority: ($render_priority) style_priority: ($style_priority)"
-# done
-
-
-# family_count=$(printf "%s\n" "${!groups[@]}" | cut -d'|' -f2 | sort -u | wc -l)
-# group_keys=$(printf "%s\n" "${!groups[@]}" | cut -d'|' -f2 | sort -u)
-
-
-# log "+ COUNT"
-# log "| + family count ($family_count):"
-
-# while IFS= read -r family; do
-#     count_faces=$(printf "%s\n" "${!groups[@]}" | grep "${family}|" | wc -l)
-
-#     log "| | - $family ($count_faces faces)"
-# done < <(printf "%s\n" "${!groups[@]}" | cut -d'|' -f2 | sort -u)
-
-
-# log "+ GENERATE"
-# keys=$(printf "%s\n" "${!groups[@]}")
-
-# {
-#     echo "/*"
-#     echo " * This file was generated by 2fontface."
-#     echo " */"
-#     echo
-# } >&3
-
-# for key in $(printf "%s\n" "${!groups[@]}" | sort -u); do
-#     log "| - generating $key"
-
-#     IFS='|' read -r _ family weight style stretch <<< "$key"
-    
-#     {
-# 	echo "@font-face {"
-# 	echo "    font-family: '${family}';"
-# 	echo "    src:"
-
-# 	mapfile -t lines < <(
-# 	    printf "%s" "${groups[$key]}" |
-# 		sort -t'|' -k1,1n -k2,2n -k3,3
-# 	)
-
-# 	for ((i=0; i<${#lines[@]}; i++)); do
-# 	    IFS='|' read -r _ _ src filename <<< "${lines[$i]}"
-	    
-# 	    if (( i == ${#lines[@]} - 1 )); then
-# 		echo "        $src;"
-# 	    else
-# 		echo "        $src,"
-# 	    fi
-# 	done
-
-# 	echo "    font-weight: ${weight};"
-# 	echo "    font-style: ${style};"
-
-# 	if [[ "$stretch" != "normal" ]]; then
-# 	    echo "    font-stretch: ${stretch};"
-# 	fi
-	
-# 	echo "    font-display: swap;"
-# 	echo "}"
-# 	echo
-#     } >&3
-# done
-
-# exec 3>&-
-
-# {
-#     echo
-#     echo "Generated: $OUTPUT"
-    
-#     echo "Families:  $family_count"
-#     for family in $(printf "%s\n" "${!groups[@]}" | cut -d'|' -f 2 | sort -u); do
-# 	count=$(printf "%s\n" "${!groups[@]}" | grep "${family}|" | wc -l)
-# 	echo "  $family ($count faces)"
-#     done
-
-#     echo "Faces:     ${#groups[@]}"
-#     echo "Files:     $font_count"
-# } >&2
-
