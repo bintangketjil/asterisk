@@ -6,13 +6,9 @@ date: 2026-07-31
 css: /static/css/style.css
 ---
 
-::::: {.container}
-# Writings
+::::: {.container .grid .split .gap-8}
 
-Long-form writing on some [topics](link). Some of it are final while others are not.
-
-:::: {.grid .split .al-baseline .gap-4 .marginy-7}
-::: {tag="aside" .muted .borderl}
+::: {tag="aside" unwrap="p" .split-r .font-sans .text-xs .muted}
 10 entries across:
 
 - [Essay](link)
@@ -20,12 +16,14 @@ Long-form writing on some [topics](link). Some of it are final while others are 
 - [Review](link)
 - [Guide](link)
 
-\
-
 [Graph &nearr;](link)
 :::
 
-::: {.list-nostyle .li-marginy-3}
+::: {.content .split-l .list-nostyle .li-marginy-3}
+# Writings
+
+Long-form writing on some [topics](link). Some of it are final while others are not.
+
 * ## 2026
   
   + [08/08]{.meta} &middot; [Decision](link)
@@ -40,5 +38,5 @@ Long-form writing on some [topics](link). Some of it are final while others are 
   + [08/08]{.meta} &middot; [Decision](link)
   + [01/08]{.meta} &middot; [What We Talk About When We Talk About Love](link)
 :::
-::::
+
 :::::
