@@ -3,7 +3,7 @@ title: header
 category: partials
 type: header-root
 ---
-::: {.mw-base .flex .between .center .maxw-base}
+::: {.flex .between .center .maxw-md}
 ::: {tag="nav" unwrap="p" .site-nav .flex .gap-1}
 [Latest](/latest)
 [/]{.sep}
