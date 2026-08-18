@@ -5,21 +5,32 @@
   $for(author-meta)$
   <meta name="author" content="$author-meta$" />
   $endfor$
+
   $if(date-meta)$
   <meta name="dcterms.date" content="$date-meta$" />
   $endif$
+
   $if(keywords)$
   <meta name="keywords" content="$for(keywords)$$keywords$$sep$, $endfor$" />
   $endif$
+
   $if(description-meta)$
   <meta name="description" content="$description-meta$" />
   $endif$
+
+  $if(scripts)$
+  $for(scripts)$
+  <script src="$scripts$" defer></script>
+  $endfor$
+  $endif$
+
   <style>
     $styles.html()$
   </style>
   $for(css)$
   <link rel="stylesheet" href="$css$">
   $endfor$
+
   <title>
     $if(title-prefix)$
     $title-prefix$ –
@@ -29,9 +40,11 @@
     $title-suffix$
     $endif$
   </title>
+
   $for(header-includes)$
   $header-includes$
   $endfor$
+
   $if(math)$
   $if(mathjax)$
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
