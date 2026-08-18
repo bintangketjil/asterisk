@@ -8,18 +8,7 @@ css: /static/css/style.css
 
 ::::: {.container .grid .split .gap-8}
 
-::: {tag="aside" unwrap="p" .split-r .font-sans .text-xs .muted}
-10 entries across:
-
-- [Essay](link)
-- [Poem](link)
-- [Review](link)
-- [Guide](link)
-
-[Graph &nearr;](link)
-:::
-
-::: {.content .split-l .list-nostyle .li-marginy-3}
+::: {tag="div" .split-l .list-nostyle .li-marginy-3}
 # Writings
 
 Long-form writing on some [topics](link). Some of it are final while others are not.

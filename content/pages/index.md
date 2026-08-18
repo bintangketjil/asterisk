@@ -24,7 +24,7 @@ Entry &middot; 0010
 
 :::::::
 
-::::::: {.content .split-l .maxw-base}
+::::::: {.content .split-l .maxw-md}
 
 :::::: {tag="section" .intro}
 
