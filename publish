@@ -20,29 +20,20 @@ clean() {
     fi
 }
 
-build() {
-    local input="$1"
 
-    declare -n ref="$input"
+build_assets() {
+    src="${assets[src]}"
+    out="${assets[out]}"
 
-    case "$input" in
-	assets)
-	    ref_src="${ref[src]}"
-	    ref_out="${ref[out]}"
+    if [[ ! -d "$out" ]]; then
+	echo "[create] $out"
+	mkdir -p -- "$out"
+    fi
 
-	    if [[ ! -d "$ref_out" ]]; then
-		mkdir -p -- "$ref_out"
-	    else
-		echo "[copy] $ref_out"
-		cp -ruT "$ref_src" "$ref_out"
-	    fi
-	    ;;
-	*)
-	    echo "what to build?"
-	    ;;
-    esac
+    echo "[copy] $out"
+    cp -ruT "$src" "$out"
+
 }
-
 
 dummy_page() {
     echo "[create] dummy"
@@ -220,6 +211,14 @@ generate_node() {
 export PANDOC_DATA_DIR="templates"
 
 build="build"
+partials_src="content/partials"
+partials_out="templates/partials"
+pages_src="content/pages"
+notes_src="content/writings/notes"
+
+
+# build manifest
+# (for testing purpose)
 
 base_filters=(
     "lib/filter/unwrapper.lua"
@@ -235,21 +234,28 @@ declare -A assets=(
 )
 
 declare -A header_root=(
-    [src]="content/partials/header.md"
-    [out]="templates/partials/gen-header.html"
+    [src]="$partials_src/header.md"
+    [out]="$partials_out/gen-header.html"
     [templ]="templates/header.html"
     [filters]="page_filters"
 )
 
 declare -A header_writings=(
-    [src]="content/partials/header-writings.md"
-    [out]="templates/partials/gen-header-writings.html"
+    [src]="$partials_src/header-writings.md"
+    [out]="$partials_out/gen-header-writings.html"
+    [templ]="templates/header.html"
+    [filters]="page_filters"
+)
+
+declare -A header_notes=(
+    [src]="$partials_src/header-notes.md"
+    [out]="$partials_out/gen-header-notes.html"
     [templ]="templates/header.html"
     [filters]="page_filters"
 )
 
 declare -A index_root=(
-    [src]="content/pages/index.md"
+    [src]="$pages_src/index.md"
     [out]="build/index.html"
     [templ]="templates/base.html"
     [filters]="page_filters"
@@ -257,25 +263,52 @@ declare -A index_root=(
 )
 
 declare -A index_writings=(
-    [src]="content/pages/writings.md"
+    [src]="$pages_src/writings.md"
     [out]="build/writings/index.html"
     [templ]="templates/writings.html"
+    [filters]="page_filters"
+)
+
+declare -A index_notes=(
+    [src]="$pages_src/notes.md"
+    [out]="build/writings/notes/index.html"
+    [templ]="templates/writings.html"
+    [filters]="page_filters"
+)
+
+declare -A writings_notes=(
+    [src]="$notes_src/intentions.md"
+    [out]="build/writings/notes/intentions.html"
+    [templ]="templates/notes.html"
+    [filters]="page_filters"
+)
+
+declare -A docs=(
+    [src]="content/docs/roadmap.md"
+    [out]="build/docs/roadmap.html"
+    [templ]="templates/default.html"
     [filters]="page_filters"
 )
 
 partials=(
     header_root
     header_writings
+    header_notes
 )
 
 pages=(
     index_root
     index_writings
+    index_notes
 )
-
+writings=(
+    writings_notes
+)
 all=(
     partials
     pages
+    writings
+    docs
 )
 
 
@@ -309,6 +342,5 @@ else
     set -Eeuo pipefail
 fi
 
-build assets
+build_assets
 generate all
-
