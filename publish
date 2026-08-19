@@ -272,7 +272,7 @@ declare -A index_writings=(
 declare -A index_notes=(
     [src]="$pages_src/notes.md"
     [out]="build/writings/notes/index.html"
-    [templ]="templates/writings.html"
+    [templ]="templates/notes.html"
     [filters]="page_filters"
 )
 
@@ -295,6 +295,7 @@ partials=(
     header_writings
     header_notes
 )
+
 
 pages=(
     index_root

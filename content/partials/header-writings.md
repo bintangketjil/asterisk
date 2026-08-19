@@ -6,8 +6,8 @@ type: header-writings
 
 ::: {.mw-base .flex .between .center .maxw-md}
 ::: {tag="nav" unwrap="p" .site-nav .flex .gap-1}
-[Graph](/graph)
-[/]{.sep}
+[Back](../)
+[:]{.sep}
 [Essays](/writings/essays)
 [/]{.sep}
 [Poems](/writings/poems)

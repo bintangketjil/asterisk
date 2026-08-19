@@ -19,6 +19,8 @@ local allowed = {
    span = true,
    ul = true,
    ol = true,
+   pre = true,
+   button = true,
 }
 
 local function render_unwrapped(block)
@@ -72,6 +74,41 @@ function element.attributes(block)
    return attrs
 end
 
+-- custom handler
+local handlers = {}
+
+handlers.BulletList = function(block, parent)
+   local items = {}
+
+   for _,item in ipairs(block.content) do
+      local content = pandoc.write(
+	 pandoc.Pandoc(item),
+	 "html"
+      )
+      table.insert(items, "<li>" .. content .. "</li>")
+   end
+
+   local result = table.concat(items, "\n")
+
+   return result
+end
+
+handlers.OrderedList = function(block, parent)
+   local items = {}
+
+   for _,item in ipairs(block.content) do
+      local content = pandoc.write(
+	 pandoc.Pandoc(item),
+	 "html"
+      )
+      table.insert(items, "<li>" .. content .. "</li>")
+   end
+
+   local result = table.concat(items, "\n")
+
+   return result
+end
+
 function element.render(block, walk)
    if block.t ~= "Div" then
       return nil
@@ -92,15 +129,22 @@ function element.render(block, walk)
    local parts = {}
 
    for _, child in ipairs(content) do
-      if unwrap[child.t] then
+      local handler = handlers[child.t]
+
+      if handler then
+	 table.insert(parts, handler(child, block, walk))
+
+      elseif unwrap[child.t] then
 	 local rendered = render_unwrapped(child)
 
 	 if rendered then
 	    table.insert(parts, rendered)
 	 end
       else
+	 local walked = walk.block(child)
+	 
 	 table.insert(parts, pandoc.write(
-			 pandoc.Pandoc({ child }),
+			 pandoc.Pandoc({ walked }),
 			 "html"
 	 ))
       end

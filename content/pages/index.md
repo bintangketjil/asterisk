@@ -18,7 +18,7 @@ Entry &middot; 0010
 [Chronological &nearrow;](link)\
 [Graph &nearrow;](link)
 
-[Latest]{.bold}
+[Latest](/latest){.text-bold}
 
 14 Aug &middot; [Moon and the Soil](link) on [Essay](link)
 

@@ -85,6 +85,7 @@
     :root {
 	--font-fanwood: "Fanwood";
 	--font-inter: "Inter";
+	--font-garamond: "AGaramond";
 	--font-default: var(--font-fanwood);
 	--font-sans: var(--font-inter);
 	--font-mono: monospace;
@@ -148,6 +149,17 @@
 	counter-reset: section;
     }
 
+    :where(a) {
+	text-decoration: underline;
+	text-decoration-style: dashed;
+	text-decoration-thickness: from-font;
+	text-underline-offset: 0.25rem;
+	&:hover {
+	    color: var(--link-hover-faint);
+	    text-decoration: none;
+	}
+    }
+
     :where(main) {
 	margin-block-end: var(--space-8);
     }
@@ -161,6 +173,7 @@
 	    margin-block-end: 0;
 	}
     }
+
 
     main :where(:is(h1, h2, h3, h4, h5):is(:not([class]))) {
 	font-size: inherit;
@@ -188,7 +201,12 @@
 	font-size: var(--text-rs);
     }
 
-    .site-nav {
+    .site-nav a {
+	text-decoration: none;
+	opacity: .9;
+	&:hover {
+	    opacity: 1;
+	}
     }
 
     main aside {
@@ -206,23 +224,31 @@
     }
 
     /* tabbed component */
-    .tabbed {
+    .tabs {
+    }
+    .tab-navs {
+	display: flex;
+	gap: var(--space-2);
+    }
+    .tab {
 	position: relative;
 	z-index: 1;
 	cursor: pointer;
 	padding-block: var(--space-1);
 	background: none;
 	border: 0;
-	color: var(--muted);
+	font-family: var(--font-sans);
+	font-size: var(--text-sm);
+	opacity: .7;
     }
     .tab.active {
 	text-decoration: underline;
 	text-decoration-thickness: auto;
-	text-underline-offset: 0.25rem;
+	text-underline-offset: 0.5rem;
 	background: var(--bg);
-	color: currentColor;
+	opacity: 1;
     }
-    .tabbed-content {
+    .tab-content {
 	margin-top: -1px;
 	min-height: 8rem;
     }
@@ -233,12 +259,22 @@
 	display: none;
     }
 
+    .list-nostyle, .list-nostyle ul {
+	list-style-type: none;
+	padding: 0;
+    }
+    .list-nostyle li {
+	margin-block: var(--space-2);
+	&:first-child {
+	    margin-block-start: 0;
+	}
+	&:last-child {
+	    margin-block-end: 0;
+	}
+    }
 }
 
 @layer utilites {
-    .mx-auto {
-	margin-inline: auto;
-    }
     .maxw-base {
 	max-width: var(--layout-base);
     }
@@ -256,6 +292,38 @@
     }
     .minh-100 {
 	min-height: 100px;
+    }
+    
+    .mx-auto {
+	margin-inline: auto;
+    }
+    
+    .my-1 {
+	margin-block: var(--space-1);
+    }
+    .my-2 {
+	margin-block: var(--space-2);
+    }
+    .my-3 {
+	margin-block: var(--space-3);
+    }
+    .my-4 {
+	margin-block: var(--space-4);
+    }
+    .my-5 {
+	margin-block: var(--space-5);
+    }
+    .my-6 {
+	margin-block: var(--space-6);
+    }
+    .my-7 {
+	margin-block: var(--space-7);
+    }
+    .my-8 {
+	margin-block: var(--space-8);
+    }
+    .my-9 {
+	margin-block: var(--space-9);
     }
 
     .gap-1 {
@@ -282,7 +350,11 @@
     .gap-8 {
 	gap: var(--space-8);
     }
-	
+
+    .baseline {
+	align-items: baseline;
+    }
+
     .flex {
 	display: flex;
 	flex-wrap: wrap;
@@ -296,6 +368,14 @@
 	align-items: center;
     }
 
+    .flex.column {
+	flex-direction: column;
+    }
+
+    .flex.row {
+	flex-direction: row;
+    }
+
     .grid {
 	display: grid;
     }
@@ -306,9 +386,7 @@
     .grid.split {
 	grid-template-columns: 1fr 30%;
     }
-    .grid.baseline {
-	align-items: baseline;
-    }
+
     .grid > .split-r {
 	grid-column: 2;
 	grid-row: 1;
@@ -337,6 +415,9 @@
     .font-sans {
 	font-family: var(--font-sans);
     }
+    .font-garamond {
+	font-family: var(--font-garamond);
+    }
 
     .fweight-3 {
 	font-weight: 300;
@@ -364,13 +445,16 @@
 	color: var(--muted2);
     }
 
-    .list-nostyle ul {
-	list-style-type: none;
-	padding: 0;
+    .sep {
+	color: var(--muted2);
     }
-    .list-nostyle li {
-	margin-block: var(--space-3);
+
+    .meta {
+	font-family: var(--font-sans);
+	font-size: var(--text-sm);
     }
-    .list-nostyle span.meta {
+    .meta.date {
+	font-variant-numeric: tabular-nums;
     }
+
 }

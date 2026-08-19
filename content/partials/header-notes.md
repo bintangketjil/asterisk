@@ -1,14 +1,14 @@
 ---
 title: header
 category: partials
-type: header-writings
+type: header-notes
 ---
 
 ::: {.mw-base .flex .between .center .maxw-md}
 
 ::: {tag="nav" unwrap="p" .site-nav .flex .gap-1}
-[Writings](/writings)
-[/]{.sep}
+[Back](../)
+[:]{.sep}
 [Notes](/writings/notes)
 :::
 
